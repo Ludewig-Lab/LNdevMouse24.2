@@ -1,0 +1,17 @@
+name: "LNdevMouse24.2"
+output_dir: ../docs
+navbar:
+  title: "LNdevMouse24.2"
+  left:
+  - text: Home
+    href: index.html
+  - text: About
+    href: about.html
+  - text: License
+    href: license.html
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: yes
+    theme: cosmo
+    highlight: textmate
