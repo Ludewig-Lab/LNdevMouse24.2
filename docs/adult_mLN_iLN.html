@@ -382,7 +382,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2025-07-11
+<strong>Last updated:</strong> 2025-07-14
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -420,10 +420,10 @@ changes </a>
 <div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R
-Markdown file created these results, you’ll want to first commit it to
-the Git repo. If you’re still working on the analysis, you can ignore
-this warning. When you’re finished, you can run
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
 <code>wflow_publish</code> to commit the R Markdown file and build the
 HTML.</p>
 </div>
@@ -516,15 +516,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLudewigLabLNdevMouse242treee2b9f791025e09d4f3c1518537f2a99331583ea7targetblanke2b9f79a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomLudewigLabLNdevMouse242tree89c34973f92c1f8944098a92eaf40a939ef248aatargetblank89c3497a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/tree/e2b9f791025e09d4f3c1518537f2a99331583ea7" target="_blank">e2b9f79</a>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/tree/89c34973f92c1f8944098a92eaf40a939ef248aa" target="_blank">89c3497</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomLudewigLabLNdevMouse242treee2b9f791025e09d4f3c1518537f2a99331583ea7targetblanke2b9f79a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomLudewigLabLNdevMouse242tree89c34973f92c1f8944098a92eaf40a939ef248aatargetblank89c3497a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -534,7 +534,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/tree/e2b9f791025e09d4f3c1518537f2a99331583ea7" target="_blank">e2b9f79</a>.
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/tree/89c34973f92c1f8944098a92eaf40a939ef248aa" target="_blank">89c3497</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -553,12 +553,11 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
-
-Untracked files:
-    Untracked:  analysis/adult_mLN_iLN.Rmd
+    Ignored:    analysis/figure/
 
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/adult_mLN_iLN.Rmd
+    Modified:   analysis/adult_mLN_iLN2.Rmd
 
 </code></pre>
 <p>
@@ -574,9 +573,72 @@ have uncommitted changes.
 </div>
 <div id="versions" class="tab-pane fade">
 <p>
-There are no past versions. Publish this analysis with
-<code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/adult_mLN_iLN.Rmd</code>) and
+HTML (<code>docs/adult_mLN_iLN.html</code>) files. If you’ve configured
+a remote Git repository (see <code>?wflow_git_remote</code>), click on
+the hyperlinks in the table below to view the files as they were in that
+past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/analysis/adult_mLN_iLN.Rmd" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+<td>
+july11
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/Ludewig-Lab/LNdevMouse24.2/0ff885c177d184247174fb4bb48cd03950f3657f/docs/adult_mLN_iLN.html" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+<td>
+july11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -653,7 +715,7 @@ Number of edges: 747906
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.9267
 Number of communities: 12
-Elapsed time: 5 seconds
+Elapsed time: 4 seconds
 Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
 Number of nodes: 23167
@@ -662,7 +724,7 @@ Number of edges: 747906
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.8790
 Number of communities: 17
-Elapsed time: 4 seconds
+Elapsed time: 3 seconds
 Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
 Number of nodes: 23167
@@ -671,7 +733,7 @@ Number of edges: 747906
 Running Louvain algorithm...
 Maximum modularity in 10 random starts: 0.8611
 Number of communities: 20
-Elapsed time: 4 seconds
+Elapsed time: 3 seconds
 Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
 
 Number of nodes: 23167
@@ -702,6 +764,43 @@ DimPlot(seuratA, reduction = &quot;umap&quot;, group.by = &quot;RNA_snn_res.0.25
   xlab(&quot;umap1&quot;) +
   ylab(&quot;umap2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20clustering%20pre%20filter-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-clustering-pre-filter-1">
+Past versions of "umap clustering pre filter-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-clustering-pre-filter-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap clustering pre filter-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="location" class="section level4">
 <h4>location</h4>
@@ -715,6 +814,43 @@ DimPlot(seuratA, reduction = &quot;umap&quot;, group.by = &quot;location&quot;, 
   xlab(&quot;umap1&quot;) +
   ylab(&quot;umap2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20location%20pre%20filter-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-location-pre-filter-1">
+Past versions of "umap location pre filter-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-location-pre-filter-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap location pre filter-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="calculate-cluster-marker-genes-pre-filter"
 class="section level4">
@@ -737,7 +873,123 @@ pList &lt;- sapply(selGenesViolin, function(x){
   theme(legend.position=&quot;right&quot;)
   plot(p)
 })</code></pre>
-<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes%20pre%20filter-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes%20pre%20filter-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes%20pre%20filter-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes%20pre%20filter-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-pre-filter-1">
+Past versions of "featureplot sel genes pre filter-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-pre-filter-1"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes pre filter-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes%20pre%20filter-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-pre-filter-2">
+Past versions of "featureplot sel genes pre filter-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-pre-filter-2"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes pre filter-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes%20pre%20filter-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-pre-filter-3">
+Past versions of "featureplot sel genes pre filter-3.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-pre-filter-3"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes pre filter-3.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="filter-object" class="section level4">
 <h4>filter object</h4>
@@ -814,6 +1066,43 @@ DimPlot(seuratA, reduction = &quot;umap&quot;, group.by = &quot;RNA_snn_res.0.25
   xlab(&quot;umap1&quot;) +
   ylab(&quot;umap2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20clustering-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-clustering-1">
+Past versions of "umap clustering-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-clustering-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap clustering-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="location-1" class="section level4">
 <h4>location</h4>
@@ -825,6 +1114,43 @@ DimPlot(seuratA, reduction = &quot;umap&quot;, group.by = &quot;RNA_snn_res.0.25
   xlab(&quot;umap1&quot;) +
   ylab(&quot;umap2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20location-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-location-1">
+Past versions of "umap location-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-location-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap location-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="plot-features" class="section level3">
@@ -844,7 +1170,462 @@ pList &lt;- sapply(selGenesViolin, function(x){
   theme(legend.position=&quot;right&quot;)
   plot(p)
 })</code></pre>
-<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-1">
+Past versions of "featureplot sel genes-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-2">
+Past versions of "featureplot sel genes-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-3">
+Past versions of "featureplot sel genes-3.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-3.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-4">
+Past versions of "featureplot sel genes-4.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-4.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-5">
+Past versions of "featureplot sel genes-5.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-5.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-6">
+Past versions of "featureplot sel genes-6.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-6.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-7">
+Past versions of "featureplot sel genes-7.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-7.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-8">
+Past versions of "featureplot sel genes-8.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-8.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-9">
+Past versions of "featureplot sel genes-9.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-9.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-10">
+Past versions of "featureplot sel genes-10.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-10.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-11">
+Past versions of "featureplot sel genes-11.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-11.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20sel%20genes-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-sel-genes-12">
+Past versions of "featureplot sel genes-12.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-sel-genes-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot sel genes-12.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="integrate-data-across-location" class="section level3">
 <h3>integrate data across location</h3>
@@ -875,7 +1656,6 @@ for (i in 1:length(res)){
   seuratA.int &lt;- FindClusters(object = seuratA.int, resolution = res[i],
                               random.seed = 1234)
 }</code></pre>
-<pre class="r"><code>saveRDS(seuratA.int, file=paste0(basedir,&quot;/data/LNmLToRev_adultonly_seurat.integrated.rds&quot;))</code></pre>
 </div>
 <div id="load-integrated-object-adult" class="section level3">
 <h3>load integrated object adult</h3>
@@ -908,12 +1688,12 @@ table(seuratA.int$label)</code></pre>
 <pre><code>
   actMedRC    FDC/MRC      MedRC MedRC/IFRC    Pi16+RC        PRC       TBRC        TRC       VSMC 
       4020       1292       2371       4868        600       2192       3841       2839        265 </code></pre>
-<pre class="r"><code>colLab2 &lt;- colLab
-colLab &lt;- c(&quot;#42a071&quot;, &quot;#900C3F&quot;,&quot;#b66e8d&quot;, &quot;#61a4ba&quot;, &quot;#424671&quot;, &quot;#003C67FF&quot;,
+<pre class="r"><code>colLab &lt;- c(&quot;#42a071&quot;, &quot;#900C3F&quot;,&quot;#b66e8d&quot;, &quot;#61a4ba&quot;, &quot;#424671&quot;, &quot;#003C67FF&quot;,
             &quot;#e3953d&quot;, &quot;#714542&quot;, &quot;#b6856e&quot;, &quot;#FFC300&quot;)
 
 names(colLab) &lt;- c(&quot;FDC/MRC&quot;, &quot;TRC&quot;, &quot;TBRC&quot;, &quot;MedRC/IFRC&quot;, &quot;MedRC&quot; , &quot;actMedRC&quot;,
                    &quot;PRC&quot;, &quot;Pi16+RC&quot;, &quot;VSMC&quot;)</code></pre>
+<pre class="r"><code>saveRDS(seuratA.int, file=paste0(basedir,&quot;/data/LNmLToRev_adultonly_seurat.integrated.rds&quot;))</code></pre>
 </div>
 </div>
 <div id="dimplot-int-data" class="section level3">
@@ -928,6 +1708,43 @@ names(colLab) &lt;- c(&quot;FDC/MRC&quot;, &quot;TRC&quot;, &quot;TBRC&quot;, &q
   xlab(&quot;umap1&quot;) +
   ylab(&quot;umap2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20clustering-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-clustering-1">
+Past versions of "umap int clustering-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-clustering-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int clustering-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="label" class="section level4">
 <h4>label</h4>
@@ -938,15 +1755,126 @@ names(colLab) &lt;- c(&quot;FDC/MRC&quot;, &quot;TRC&quot;, &quot;TBRC&quot;, &q
   xlab(&quot;UMAP1&quot;) +
   ylab(&quot;UMAP2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-1">
+Past versions of "umap int label-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(seuratA.int, reduction = &quot;umap&quot;, group.by = &quot;label&quot;, pt.size=0.5,
         cols = colLab, shuffle = T)+
   theme_void()</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-2">
+Past versions of "umap int label-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(seuratA.int, reduction = &quot;umap&quot;, group.by = &quot;label&quot;, pt.size=0.5,
         cols = colLab, shuffle = T)+
   theme_void() + 
   theme(legend.position = &quot;none&quot;) </code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-3">
+Past versions of "umap int label-3.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label-3.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="label-mln-iln-sep" class="section level3">
@@ -959,11 +1887,85 @@ DimPlot(seuratA.intmLN, reduction = &quot;umap&quot;, group.by = &quot;label&quo
         cols = colLab, shuffle = T)+
   theme_void()</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label%20sep%20mLN-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-sep-mLN-1">
+Past versions of "umap int label sep mLN-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-sep-mLN-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label sep mLN-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(seuratA.intmLN, reduction = &quot;umap&quot;, group.by = &quot;label&quot;, pt.size=0.5,
         cols = colLab, shuffle = T)+
   theme_void() + 
   theme(legend.position = &quot;none&quot;) </code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label%20sep%20mLN-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-sep-mLN-2">
+Past versions of "umap int label sep mLN-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-sep-mLN-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label sep mLN-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="iln" class="section level4">
 <h4>iLN</h4>
@@ -973,11 +1975,85 @@ DimPlot(seuratA.intiLN, reduction = &quot;umap&quot;, group.by = &quot;label&quo
         cols = colLab, shuffle = T)+
   theme_void()</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label%20sep%20iLN-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-sep-iLN-1">
+Past versions of "umap int label sep iLN-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-sep-iLN-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label sep iLN-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(seuratA.intiLN, reduction = &quot;umap&quot;, group.by = &quot;label&quot;, pt.size=0.5,
         cols = colLab, shuffle = T)+
   theme_void() + 
   theme(legend.position = &quot;none&quot;) </code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label%20sep%20iLN-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-sep-iLN-2">
+Past versions of "umap int label sep iLN-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-sep-iLN-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label sep iLN-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="label-split-by-location" class="section level4">
 <h4>label split by location</h4>
@@ -989,10 +2065,86 @@ DimPlot(seuratA.intiLN, reduction = &quot;umap&quot;, group.by = &quot;label&quo
   xlab(&quot;UMAP1&quot;) +
   ylab(&quot;UMAP2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label%20split%20by%20location-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-split-by-location-1">
+Past versions of "umap int label split by location-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-split-by-location-1"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label split by location-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(seuratA.int, reduction = &quot;umap&quot;, group.by = &quot;label&quot;, pt.size=0.5,
         cols = colLab, split.by = &quot;location&quot;, shuffle = T)+
   theme_void()</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20label%20split%20by%20location-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-label-split-by-location-2">
+Past versions of "umap int label split by location-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-label-split-by-location-2"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int label split by location-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="location-2" class="section level4">
 <h4>location</h4>
@@ -1004,10 +2156,84 @@ DimPlot(seuratA.intiLN, reduction = &quot;umap&quot;, group.by = &quot;label&quo
   xlab(&quot;umap1&quot;) +
   ylab(&quot;umap2&quot;)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20location-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-location-1">
+Past versions of "umap int location-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-location-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int location-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>DimPlot(seuratA.int, reduction = &quot;umap&quot;, group.by = &quot;location&quot;, pt.size=0.5,
         cols = colLoc, split.by = &quot;location&quot;, shuffle = T)+
   theme_void()</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/umap%20int%20location-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-umap-int-location-2">
+Past versions of "umap int location-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-umap-int-location-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/umap int location-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="plot-features-int" class="section level3">
@@ -1028,7 +2254,538 @@ pList &lt;- sapply(selGenesViolin, function(x){
   theme(legend.position=&quot;right&quot;)
   plot(p)
 })</code></pre>
-<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-12.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-14.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-1">
+Past versions of "featureplot int sel genes-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-2">
+Past versions of "featureplot int sel genes-2.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-2.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-3">
+Past versions of "featureplot int sel genes-3.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-3.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-4">
+Past versions of "featureplot int sel genes-4.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-4.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-5">
+Past versions of "featureplot int sel genes-5.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-5.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-6">
+Past versions of "featureplot int sel genes-6.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-6.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-7">
+Past versions of "featureplot int sel genes-7.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-7.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-8">
+Past versions of "featureplot int sel genes-8.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-8.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-9">
+Past versions of "featureplot int sel genes-9.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-9.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-10">
+Past versions of "featureplot int sel genes-10.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-10.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-11">
+Past versions of "featureplot int sel genes-11.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-11.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-12">
+Past versions of "featureplot int sel genes-12.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-12.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-13.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-13">
+Past versions of "featureplot int sel genes-13.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-13.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/adult_mLN_iLN.Rmd/featureplot%20int%20sel%20genes-14.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-featureplot-int-sel-genes-14">
+Past versions of "featureplot int sel genes-14.png"
+</button>
+</p>
+<div id="fig-no-spaces-featureplot-int-sel-genes-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/featureplot int sel genes-14.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cluster-characterization" class="section level3">
 <h3>cluster characterization</h3>
@@ -1106,7 +2863,7 @@ Idents(seuratA.int) &lt;- seuratA.int$intCluster
 
 seuratAint_markers &lt;- FindAllMarkers(seuratA.int, only.pos = T, logfc.threshold = 0.25)
 
-### plot DE genes top 10 avg logFC
+## plot DE genes top 10 avg logFC
 markerAll &lt;- seuratAint_markers %&gt;% group_by(cluster) %&gt;% 
   mutate(geneID = gene) %&gt;% top_n(10, avg_log2FC) %&gt;%
   mutate(gene=gsub(&quot;.*\\.&quot;, &quot;&quot;,  geneID)) %&gt;% 
@@ -1123,12 +2880,50 @@ pOut &lt;- avgHeatmap(seurat = seuratA.int, selGenes = markerAll,
                   gapVecR=gapR$cumSum, gapVecC=NULL,cc=T,
                   cr=F, condCol=F)</code></pre>
 <p><img src="figure/adult_mLN_iLN.Rmd/characterize%20clusters%20heatmap-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-characterize-clusters-heatmap-1">
+Past versions of "characterize clusters heatmap-1.png"
+</button>
+</p>
+<div id="fig-no-spaces-characterize-clusters-heatmap-1"
+class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/Ludewig-Lab/LNdevMouse24.2/blob/0ff885c177d184247174fb4bb48cd03950f3657f/docs/figure/adult_mLN_iLN.Rmd/characterize clusters heatmap-1.png" target="_blank">0ff885c</a>
+</td>
+<td>
+angeldemartin
+</td>
+<td>
+2025-07-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="session-info" class="section level3">
 <h3>session info</h3>
 <pre class="r"><code>date()</code></pre>
-<pre><code>[1] &quot;Fri Jul 11 16:38:30 2025&quot;</code></pre>
+<pre><code>[1] &quot;Mon Jul 14 16:14:15 2025&quot;</code></pre>
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.4.0 (2024-04-24)
 Platform: x86_64-apple-darwin20
@@ -1171,8 +2966,8 @@ loaded via a namespace (and not attached):
   [7] bit_4.6.0                 doParallel_1.0.17         clue_0.3-66              
  [10] lattice_0.22-7            rjson_0.2.23              blob_1.2.4               
  [13] S4Arrays_1.4.1            pbkrtest_0.5.4            parallel_4.4.0           
- [16] png_0.1-8                 plotrix_3.8-4             cli_3.6.5                
- [19] ggplotify_0.1.2           goftest_1.2-3             VIM_6.2.2                
+ [16] png_0.1-8                 plotrix_3.8-4             ggplotify_0.1.2          
+ [19] cli_3.6.5                 goftest_1.2-3             VIM_6.2.2                
  [22] variancePartition_1.34.0  BiocNeighbors_1.22.0      shadowtext_0.1.4         
  [25] uwot_0.2.3                curl_6.2.3                tidytree_0.4.6           
  [28] mime_0.13                 evaluate_1.0.3            ComplexHeatmap_2.20.0    
@@ -1192,7 +2987,7 @@ loaded via a namespace (and not attached):
  [70] RhpcBLASctl_0.23-42       timechange_0.3.0          foreach_1.5.2            
  [73] patchwork_1.3.0           caTools_1.18.3            ggtree_3.12.0            
  [76] data.table_1.17.4         R.oo_1.27.1               RSpectra_0.16-2          
- [79] irlba_2.3.5.1             fastDummies_1.7.5         gridGraphics_0.5-1       
+ [79] irlba_2.3.5.1             gridGraphics_0.5-1        fastDummies_1.7.5        
  [82] lazyeval_0.2.2            yaml_2.3.10               survival_3.8-3           
  [85] scattermore_1.2           crayon_1.5.3              RcppAnnoy_0.0.22         
  [88] RColorBrewer_1.1-3        progressr_0.15.1          tweenr_2.0.3             
@@ -1220,35 +3015,35 @@ loaded via a namespace (and not attached):
 [154] R.utils_2.13.0            memoise_2.0.1             rmarkdown_2.29           
 [157] scales_1.4.0              R.methodsS3_1.8.2         RANN_2.6.2               
 [160] Cairo_1.6-2               spatstat.data_3.1-6       rstudioapi_0.17.1        
-[163] cluster_2.1.8.1           mutoss_0.1-13             spatstat.utils_3.1-4     
-[166] hms_1.1.3                 fitdistrplus_1.2-2        cowplot_1.1.3            
-[169] colorspace_2.1-1          rlang_1.1.6               DelayedMatrixStats_1.26.0
-[172] sparseMatrixStats_1.16.0  xts_0.14.1                dotCall64_1.2            
-[175] shinydashboard_0.7.3      ggforce_0.4.2             laeken_0.5.3             
-[178] mgcv_1.9-3                xfun_0.52                 e1071_1.7-16             
-[181] TH.data_1.1-3             iterators_1.0.14          abind_1.4-8              
-[184] GOSemSim_2.30.2           treeio_1.28.0             bitops_1.0-9             
-[187] Rdpack_2.6.4              promises_1.3.3            scatterpie_0.2.4         
-[190] RSQLite_2.4.0             qvalue_2.36.0             sandwich_3.1-1           
-[193] fgsea_1.30.0              DelayedArray_0.30.1       proxy_0.4-27             
-[196] GO.db_3.19.1              compiler_4.4.0            prettyunits_1.2.0        
-[199] boot_1.3-31               beachmat_2.20.0           listenv_0.9.1            
-[202] Rcpp_1.0.14               edgeR_4.2.2               workflowr_1.7.1          
-[205] BiocSingular_1.20.0       tensor_1.5                MASS_7.3-65              
-[208] progress_1.2.3            BiocParallel_1.38.0       babelgene_22.9           
-[211] spatstat.random_3.4-1     R6_2.6.1                  fastmap_1.2.0            
-[214] multcomp_1.4-28           fastmatch_1.1-6           rstatix_0.7.2            
-[217] vipor_0.4.7               TTR_0.24.4                ROCR_1.0-11              
-[220] TFisher_0.2.0             rsvd_1.0.5                vcd_1.4-13               
-[223] nnet_7.3-20               gtable_0.3.6              KernSmooth_2.23-26       
-[226] miniUI_0.1.2              deldir_2.0-4              htmltools_0.5.8.1        
-[229] ggthemes_5.1.0            bit64_4.6.0-1             spatstat.explore_3.4-3   
-[232] lifecycle_1.0.4           blme_1.0-6                nloptr_2.2.1             
-[235] sass_0.4.10               vctrs_0.6.5               robustbase_0.99-4-1      
-[238] spatstat.geom_3.4-1       sn_2.1.1                  ggfun_0.1.8              
-[241] future.apply_1.11.3       bslib_0.9.0               pillar_1.10.2            
-[244] gplots_3.2.0              pcaMethods_1.96.0         locfit_1.5-9.12          
-[247] jsonlite_2.0.0            GetoptLong_1.0.5         </code></pre>
+[163] cluster_2.1.8.1           whisker_0.4.1             mutoss_0.1-13            
+[166] spatstat.utils_3.1-4      hms_1.1.3                 fitdistrplus_1.2-2       
+[169] cowplot_1.1.3             colorspace_2.1-1          rlang_1.1.6              
+[172] DelayedMatrixStats_1.26.0 sparseMatrixStats_1.16.0  xts_0.14.1               
+[175] dotCall64_1.2             shinydashboard_0.7.3      ggforce_0.4.2            
+[178] laeken_0.5.3              mgcv_1.9-3                xfun_0.52                
+[181] e1071_1.7-16              TH.data_1.1-3             iterators_1.0.14         
+[184] abind_1.4-8               GOSemSim_2.30.2           treeio_1.28.0            
+[187] bitops_1.0-9              Rdpack_2.6.4              promises_1.3.3           
+[190] scatterpie_0.2.4          RSQLite_2.4.0             qvalue_2.36.0            
+[193] sandwich_3.1-1            fgsea_1.30.0              DelayedArray_0.30.1      
+[196] proxy_0.4-27              GO.db_3.19.1              compiler_4.4.0           
+[199] prettyunits_1.2.0         boot_1.3-31               beachmat_2.20.0          
+[202] listenv_0.9.1             Rcpp_1.0.14               edgeR_4.2.2              
+[205] workflowr_1.7.1           BiocSingular_1.20.0       tensor_1.5               
+[208] MASS_7.3-65               progress_1.2.3            BiocParallel_1.38.0      
+[211] babelgene_22.9            spatstat.random_3.4-1     R6_2.6.1                 
+[214] fastmap_1.2.0             multcomp_1.4-28           fastmatch_1.1-6          
+[217] rstatix_0.7.2             vipor_0.4.7               TTR_0.24.4               
+[220] ROCR_1.0-11               TFisher_0.2.0             rsvd_1.0.5               
+[223] vcd_1.4-13                nnet_7.3-20               gtable_0.3.6             
+[226] KernSmooth_2.23-26        miniUI_0.1.2              deldir_2.0-4             
+[229] htmltools_0.5.8.1         ggthemes_5.1.0            bit64_4.6.0-1            
+[232] spatstat.explore_3.4-3    lifecycle_1.0.4           blme_1.0-6               
+[235] nloptr_2.2.1              sass_0.4.10               vctrs_0.6.5              
+[238] robustbase_0.99-4-1       spatstat.geom_3.4-1       sn_2.1.1                 
+[241] ggfun_0.1.8               future.apply_1.11.3       bslib_0.9.0              
+[244] pillar_1.10.2             gplots_3.2.0              pcaMethods_1.96.0        
+[247] locfit_1.5-9.12           jsonlite_2.0.0            GetoptLong_1.0.5         </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1299,8 +3094,8 @@ loaded via a namespace (and not attached):
   [7] bit_4.6.0                 doParallel_1.0.17         clue_0.3-66              
  [10] lattice_0.22-7            rjson_0.2.23              blob_1.2.4               
  [13] S4Arrays_1.4.1            pbkrtest_0.5.4            parallel_4.4.0           
- [16] png_0.1-8                 plotrix_3.8-4             cli_3.6.5                
- [19] ggplotify_0.1.2           goftest_1.2-3             VIM_6.2.2                
+ [16] png_0.1-8                 plotrix_3.8-4             ggplotify_0.1.2          
+ [19] cli_3.6.5                 goftest_1.2-3             VIM_6.2.2                
  [22] variancePartition_1.34.0  BiocNeighbors_1.22.0      shadowtext_0.1.4         
  [25] uwot_0.2.3                curl_6.2.3                tidytree_0.4.6           
  [28] mime_0.13                 evaluate_1.0.3            ComplexHeatmap_2.20.0    
@@ -1320,7 +3115,7 @@ loaded via a namespace (and not attached):
  [70] RhpcBLASctl_0.23-42       timechange_0.3.0          foreach_1.5.2            
  [73] patchwork_1.3.0           caTools_1.18.3            ggtree_3.12.0            
  [76] data.table_1.17.4         R.oo_1.27.1               RSpectra_0.16-2          
- [79] irlba_2.3.5.1             fastDummies_1.7.5         gridGraphics_0.5-1       
+ [79] irlba_2.3.5.1             gridGraphics_0.5-1        fastDummies_1.7.5        
  [82] lazyeval_0.2.2            yaml_2.3.10               survival_3.8-3           
  [85] scattermore_1.2           crayon_1.5.3              RcppAnnoy_0.0.22         
  [88] RColorBrewer_1.1-3        progressr_0.15.1          tweenr_2.0.3             
@@ -1348,35 +3143,35 @@ loaded via a namespace (and not attached):
 [154] R.utils_2.13.0            memoise_2.0.1             rmarkdown_2.29           
 [157] scales_1.4.0              R.methodsS3_1.8.2         RANN_2.6.2               
 [160] Cairo_1.6-2               spatstat.data_3.1-6       rstudioapi_0.17.1        
-[163] cluster_2.1.8.1           mutoss_0.1-13             spatstat.utils_3.1-4     
-[166] hms_1.1.3                 fitdistrplus_1.2-2        cowplot_1.1.3            
-[169] colorspace_2.1-1          rlang_1.1.6               DelayedMatrixStats_1.26.0
-[172] sparseMatrixStats_1.16.0  xts_0.14.1                dotCall64_1.2            
-[175] shinydashboard_0.7.3      ggforce_0.4.2             laeken_0.5.3             
-[178] mgcv_1.9-3                xfun_0.52                 e1071_1.7-16             
-[181] TH.data_1.1-3             iterators_1.0.14          abind_1.4-8              
-[184] GOSemSim_2.30.2           treeio_1.28.0             bitops_1.0-9             
-[187] Rdpack_2.6.4              promises_1.3.3            scatterpie_0.2.4         
-[190] RSQLite_2.4.0             qvalue_2.36.0             sandwich_3.1-1           
-[193] fgsea_1.30.0              DelayedArray_0.30.1       proxy_0.4-27             
-[196] GO.db_3.19.1              compiler_4.4.0            prettyunits_1.2.0        
-[199] boot_1.3-31               beachmat_2.20.0           listenv_0.9.1            
-[202] Rcpp_1.0.14               edgeR_4.2.2               workflowr_1.7.1          
-[205] BiocSingular_1.20.0       tensor_1.5                MASS_7.3-65              
-[208] progress_1.2.3            BiocParallel_1.38.0       babelgene_22.9           
-[211] spatstat.random_3.4-1     R6_2.6.1                  fastmap_1.2.0            
-[214] multcomp_1.4-28           fastmatch_1.1-6           rstatix_0.7.2            
-[217] vipor_0.4.7               TTR_0.24.4                ROCR_1.0-11              
-[220] TFisher_0.2.0             rsvd_1.0.5                vcd_1.4-13               
-[223] nnet_7.3-20               gtable_0.3.6              KernSmooth_2.23-26       
-[226] miniUI_0.1.2              deldir_2.0-4              htmltools_0.5.8.1        
-[229] ggthemes_5.1.0            bit64_4.6.0-1             spatstat.explore_3.4-3   
-[232] lifecycle_1.0.4           blme_1.0-6                nloptr_2.2.1             
-[235] sass_0.4.10               vctrs_0.6.5               robustbase_0.99-4-1      
-[238] spatstat.geom_3.4-1       sn_2.1.1                  ggfun_0.1.8              
-[241] future.apply_1.11.3       bslib_0.9.0               pillar_1.10.2            
-[244] gplots_3.2.0              pcaMethods_1.96.0         locfit_1.5-9.12          
-[247] jsonlite_2.0.0            GetoptLong_1.0.5         </code></pre>
+[163] cluster_2.1.8.1           whisker_0.4.1             mutoss_0.1-13            
+[166] spatstat.utils_3.1-4      hms_1.1.3                 fitdistrplus_1.2-2       
+[169] cowplot_1.1.3             colorspace_2.1-1          rlang_1.1.6              
+[172] DelayedMatrixStats_1.26.0 sparseMatrixStats_1.16.0  xts_0.14.1               
+[175] dotCall64_1.2             shinydashboard_0.7.3      ggforce_0.4.2            
+[178] laeken_0.5.3              mgcv_1.9-3                xfun_0.52                
+[181] e1071_1.7-16              TH.data_1.1-3             iterators_1.0.14         
+[184] abind_1.4-8               GOSemSim_2.30.2           treeio_1.28.0            
+[187] bitops_1.0-9              Rdpack_2.6.4              promises_1.3.3           
+[190] scatterpie_0.2.4          RSQLite_2.4.0             qvalue_2.36.0            
+[193] sandwich_3.1-1            fgsea_1.30.0              DelayedArray_0.30.1      
+[196] proxy_0.4-27              GO.db_3.19.1              compiler_4.4.0           
+[199] prettyunits_1.2.0         boot_1.3-31               beachmat_2.20.0          
+[202] listenv_0.9.1             Rcpp_1.0.14               edgeR_4.2.2              
+[205] workflowr_1.7.1           BiocSingular_1.20.0       tensor_1.5               
+[208] MASS_7.3-65               progress_1.2.3            BiocParallel_1.38.0      
+[211] babelgene_22.9            spatstat.random_3.4-1     R6_2.6.1                 
+[214] fastmap_1.2.0             multcomp_1.4-28           fastmatch_1.1-6          
+[217] rstatix_0.7.2             vipor_0.4.7               TTR_0.24.4               
+[220] ROCR_1.0-11               TFisher_0.2.0             rsvd_1.0.5               
+[223] vcd_1.4-13                nnet_7.3-20               gtable_0.3.6             
+[226] KernSmooth_2.23-26        miniUI_0.1.2              deldir_2.0-4             
+[229] htmltools_0.5.8.1         ggthemes_5.1.0            bit64_4.6.0-1            
+[232] spatstat.explore_3.4-3    lifecycle_1.0.4           blme_1.0-6               
+[235] nloptr_2.2.1              sass_0.4.10               vctrs_0.6.5              
+[238] robustbase_0.99-4-1       spatstat.geom_3.4-1       sn_2.1.1                 
+[241] ggfun_0.1.8               future.apply_1.11.3       bslib_0.9.0              
+[244] pillar_1.10.2             gplots_3.2.0              pcaMethods_1.96.0        
+[247] locfit_1.5-9.12           jsonlite_2.0.0            GetoptLong_1.0.5         </code></pre>
 </div>
 </div>
 </div>

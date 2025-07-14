@@ -267,10 +267,6 @@ for (i in 1:length(res)){
 }
 ```
 
-```{r save int object adultonly, eval=FALSE, include=TRUE}
-saveRDS(seuratA.int, file=paste0(basedir,"/data/LNmLToRev_adultonly_seurat.integrated.rds"))
-```
-
 ### load integrated object adult
 ```{r load int object adultonly}
 fileNam <- paste0(basedir, "/data/LNmLToRev_adultonly_seurat.integrated.rds")
@@ -304,13 +300,15 @@ seuratA.int$label[which(seuratA.int$intCluster == "7")] <- "Pi16+RC"
 seuratA.int$label[which(seuratA.int$intCluster == "8")] <- "VSMC"
 
 table(seuratA.int$label)
-
-colLab2 <- colLab
 colLab <- c("#42a071", "#900C3F","#b66e8d", "#61a4ba", "#424671", "#003C67FF",
             "#e3953d", "#714542", "#b6856e", "#FFC300")
 
 names(colLab) <- c("FDC/MRC", "TRC", "TBRC", "MedRC/IFRC", "MedRC" , "actMedRC",
                    "PRC", "Pi16+RC", "VSMC")
+```
+
+```{r save int object adultonly, eval=FALSE, include=TRUE}
+saveRDS(seuratA.int, file=paste0(basedir,"/data/LNmLToRev_adultonly_seurat.integrated.rds"))
 ```
 
 ### Dimplot int data
@@ -499,7 +497,7 @@ Idents(seuratA.int) <- seuratA.int$intCluster
 
 seuratAint_markers <- FindAllMarkers(seuratA.int, only.pos = T, logfc.threshold = 0.25)
 
-### plot DE genes top 10 avg logFC
+## plot DE genes top 10 avg logFC
 markerAll <- seuratAint_markers %>% group_by(cluster) %>% 
   mutate(geneID = gene) %>% top_n(10, avg_log2FC) %>%
   mutate(gene=gsub(".*\\.", "",  geneID)) %>% 

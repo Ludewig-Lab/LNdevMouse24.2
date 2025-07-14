@@ -1,5 +1,5 @@
 ---
-title: "characterize adult_mLN_iLN"
+title: "characterize adult mLN and iLN"
 author: "A.DeMartin"
 date: "2025-05-06"
 output: 
@@ -16,9 +16,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, dev = c("png", "pdf"))
 seed <- 1234
 ```
 
-## load 
-### load packages
-```{r load packages, warning=FALSE, include=FALSE}
+#### load packages
+```{r load packages, warning=FALSE}
 library(ExploreSCdataSeurat3)
 library(runSeurat3)
 library(Seurat)
@@ -44,15 +43,17 @@ library(gridExtra)
 library(ggupset)
 library(VennDiagram)
 library(NCmisc)
+library(here)
 ```
 
-### load int object adult
-```{r load int object adultonly}
-fileNam <- "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/LNmLToRev_adultonly_seurat.integrated.rds"
+### load int object adult 
+```{r}
+basedir <- here()
+fileNam <- paste0(basedir, "/data/LNmLToRev_adultonly_seurat.integrated.rds")
 seuratA.int <- readRDS(fileNam)
 ```
 
-### set color vectors 
+#### set color vectors 
 ```{r set color vector}
 colLab <- c("#42a071", "#900C3F","#b66e8d", "#61a4ba", "#424671", "#003C67FF",
             "#e3953d", "#714542", "#b6856e")
@@ -70,7 +71,7 @@ colLoc <- c("#61baba", "#ba6161")
 names(colLoc) <- unique(seuratA.int$location)
 ```
 
-## umap label
+### umap label
 ```{r umap int label}
 DimPlot(seuratA.int, reduction = "umap", group.by = "label", cols = colLab)+
   theme_bw() +
@@ -80,7 +81,7 @@ DimPlot(seuratA.int, reduction = "umap", group.by = "label", cols = colLab)+
   ylab("UMAP2")
 ```
 
-## counts
+### counts
 ```{r counts-1}
 knitr::kable(table(seuratA.int$label, seuratA.int$location))
 ```
@@ -96,7 +97,6 @@ eyfpPos <- colnames(seuratSub)
 seuratA.int$EYFP <-"neg"
 seuratA.int$EYFP[which(colnames(seuratA.int)%in%eyfpPos)] <- "pos"
 table(seuratA.int$dataset, seuratA.int$EYFP)
-
 
 knitr::kable(table( seuratA.int$label, seuratA.int$EYFP))
 ```
@@ -116,6 +116,7 @@ clustDat2 <- clustCond %>%  left_join(., condTot, by = "location") %>%
 knitr::kable(clustDat2)
 ```
 
+### relative subset abundance
 ```{r plot relative abundance per location}
 lapply(names(colLoc), function(co){
   clustDat2sel <- clustDat2 %>% filter(location==co)
@@ -125,8 +126,9 @@ lapply(names(colLoc), function(co){
       main = paste0(co))
 })
 ```
-## fraction EYFP+
-### across all
+
+### fraction EYFP+
+#### across all
 ```{r barplot fraction EYFPpos across all}
 ## across all
 eyfpCnt <- data.frame(table(seuratA.int$label, seuratA.int$EYFP)) %>%
@@ -144,7 +146,8 @@ p <- ggpubr::ggbarplot(eyfpCntDat, x="Var1", y="freq", fill="eyfp",
   theme(legend.position = "right")
 p
 ```
-### individual LNs
+
+#### individual LNs
 ```{r barplot fraction EYFPpos individual LNs}
 LNvec <- unique(seuratA.int$location)
 
@@ -169,7 +172,6 @@ lapply(LNvec, function(ln){
 })
 ```
 
-### heatmap funcion
 ```{r heatmap funcion}
 avgHeatmap <- function(seurat, selGenes, colVecIdent, colVecCond=NULL,
                        ordVec=NULL, gapVecR=NULL, gapVecC=NULL,cc=FALSE,
@@ -237,8 +239,8 @@ avgHeatmap <- function(seurat, selGenes, colVecIdent, colVecCond=NULL,
 }
 ```
 
-## vis FRC marker
-### avg heatmap
+### vis FRC marker
+#### avg heatmap
 ```{r heatmap FRC marker, fig.height=8, fig.width=6}
 seurat_markers <- data.frame(gene=c("Fcgr2b","Fcer2a","Cr2","Cxcl13",
                                     "Slc7a11", "Ccl19", 
@@ -266,7 +268,7 @@ pOut <- avgHeatmap(seurat = seuratA.int, selGenes = markerAll,
                   cr=F, condCol=F)
 ```
 
-### dotplot
+#### dotplot
 ```{r dotplot FRC marker, fig.height=8, fig.width=6}
 ## Dotplot all
 seuratA.int$label <- factor(seuratA.int$label, levels = names(colLab))
@@ -281,7 +283,7 @@ DotPlot(seuratA.int, assay="RNA", features = rev(markerAll$geneID), scale =T,
   xlab("") + ylab("")
 ```
 
-## session info
+### session info
 ```{r date and session info}
 date()
 sessionInfo()
