@@ -1,0 +1,486 @@
+---
+title: "mLN EYFP+ all timepoints"
+author: "A.DeMartin"
+date: "2025-04-29"
+output: 
+  html_document:
+    keep_md: true
+    toc: true
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+options(width = 100)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, dev = c("png", "pdf"))
+seed <- 1234
+```
+
+#### load packages
+```{r load packages, warning=FALSE}
+library(ExploreSCdataSeurat3)
+library(runSeurat3)
+library(Seurat)
+library(ggpubr)
+library(pheatmap)
+library(SingleCellExperiment)
+library(dplyr)
+library(tidyverse)
+library(viridis)
+library(muscat)
+library(circlize)
+library(destiny)
+library(scater)
+library(metap)
+library(multtest)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(msigdbr)
+library(enrichplot)
+library(DOSE)
+library(grid)
+library(gridExtra)
+library(ggupset)
+library(VennDiagram)
+library(NCmisc)
+library(slingshot)
+library(RColorBrewer)
+library(here)
+```
+
+### preprocessing
+#### load object all
+```{r}
+basedir <- here()
+fileNam <- paste0(basedir, "/data/LNmLToRev_allmerged_seurat.rds")
+seuratM <- readRDS(fileNam)
+table(seuratM$dataset)
+table(seuratM$RNA_snn_res.0.25)
+table(seuratM$orig.ident)
+```
+
+#### subset EYFP+ 
+```{r subset EYFPpos, eval=FALSE, include=TRUE}
+seuratSub <- subset(seuratM, Rosa26eyfp.Rosa26eyfp>0)
+eyfpPos <- colnames(seuratSub)
+
+seuratM$EYFP <-"neg"
+seuratM$EYFP[which(colnames(seuratM)%in%eyfpPos)] <- "pos"
+
+table(seuratM$dataset, seuratM$EYFP)
+
+seuratEYFP <- subset(seuratM, EYFP == "pos")
+table(seuratEYFP$orig.ident)
+
+## rerun seurat
+seuratEYFP <- NormalizeData (object = seuratEYFP)
+seuratEYFP <- FindVariableFeatures(object = seuratEYFP)
+seuratEYFP <- ScaleData(object = seuratEYFP, verbose = TRUE)
+seuratEYFP <- RunPCA(object=seuratEYFP, npcs = 30, verbose = FALSE)
+seuratEYFP <- RunTSNE(object=seuratEYFP, reduction="pca", dims = 1:20)
+seuratEYFP <- RunUMAP(object=seuratEYFP, reduction="pca", dims = 1:20)
+seuratEYFP <- FindNeighbors(object = seuratEYFP, reduction = "pca", dims= 1:20)
+
+res <- c(0.25, 0.6, 0.8, 0.4)
+for (i in 1:length(res)) {
+  seuratEYFP <- FindClusters(object = seuratEYFP, resolution = res[i], random.seed = 1234)
+}
+```
+
+```{r, eval=FALSE, include=TRUE}
+## save object
+saveRDS(seuratEYFP, file=paste0(basedir,"/data/LNmLToRev_EYFPonly_seurat.rds"))
+```
+
+### load object EYFP+
+```{r}
+fileNam <- paste0(basedir, "/data/LNmLToRev_EYFPonly_seurat.rds")
+seuratEYFP <- readRDS(fileNam)
+table(seuratEYFP$dataset)
+table(seuratEYFP$RNA_snn_res.0.25)
+table(seuratEYFP$orig.ident)
+```
+
+#### subset mLN
+```{r, eval=FALSE, include=TRUE}
+## subset
+table(seuratEYFP$location)
+seuratmLN <- subset(seuratEYFP, location == "mLN")
+table(seuratmLN$orig.ident)
+
+## rerun seurat
+seuratmLN <- NormalizeData (object = seuratmLN)
+seuratmLN <- FindVariableFeatures(object = seuratmLN)
+seuratmLN <- ScaleData(object = seuratmLN, verbose = TRUE)
+seuratmLN <- RunPCA(object=seuratmLN, npcs = 30, verbose = FALSE)
+seuratmLN <- RunTSNE(object=seuratmLN, reduction="pca", dims = 1:20)
+seuratmLN <- RunUMAP(object=seuratmLN, reduction="pca", dims = 1:20)
+seuratmLN <- FindNeighbors(object = seuratmLN, reduction = "pca", dims= 1:20)
+
+res <- c(0.25, 0.6, 0.8, 0.4)
+for (i in 1:length(res)) {
+  seuratmLN <- FindClusters(object = seuratmLN, resolution = res[i], random.seed = 1234)
+}
+```
+
+```{r, eval=FALSE, include=TRUE}
+### save object
+saveRDS(seuratmLN, file=paste0(basedir,"/data/LNmLToRev_EYFP_mLN_seurat.rds"))
+```
+
+### load object mLN EYFP+
+```{r}
+fileNam <- paste0(basedir, "/data/LNmLToRev_EYFP_mLN_seurat.rds")
+seuratmLN <- readRDS(fileNam)
+table(seuratmLN$dataset)
+table(seuratmLN$RNA_snn_res.0.25)
+table(seuratmLN$orig.ident)
+```
+
+#### set color vectors 
+```{r set color vector}
+coltimepoint <- c("#440154FF", "#3B528BFF", "#21908CFF", "#5DC863FF")
+names(coltimepoint) <- c("E18", "P7", "3w", "8w")
+
+colPal <- c("#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#b66e8d",
+            "#61a4ba", "#6178ba", "#54a87f",  "#25328a",
+            "#b6856e", "#0073C2FF", "#EFC000FF", "#868686FF", "#CD534CFF", 
+            "#7AA6DCFF", "#003C67FF", "#8F7700FF", "#3B3B3BFF", "#A73030FF",
+            "#4A6990FF")[1:length(unique(seuratmLN$RNA_snn_res.0.4))]
+names(colPal) <- unique(seuratmLN$RNA_snn_res.0.4)
+
+collocation <- c("#61baba", "#ba6161")
+names(collocation) <- c("iLN", "mLN")
+```
+
+### dimplot
+#### clustering
+```{r dimplot clustering}
+DimPlot(seuratmLN, reduction = "umap", group.by = "RNA_snn_res.0.4",
+        cols = colPal, label = TRUE)+
+  theme_bw() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank(), 
+        panel.grid.minor = element_blank()) +
+  xlab("UMAP1") +
+  ylab("UMAP2")
+```
+
+#### timepoint
+```{r dimplot age}
+DimPlot(seuratmLN, reduction = "umap", group.by = "timepoint",
+        cols = coltimepoint)+
+  theme_bw() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank(), 
+        panel.grid.minor = element_blank()) +
+  xlab("UMAP1") +
+  ylab("UMAP2")
+```
+
+#### calculate cluster marker genes
+```{r marker RNA_snn_res.0.4, include=TRUE, eval=FALSE}
+## cluster marker
+Idents(seuratmLN) <- seuratmLN$RNA_snn_res.0.4
+markerGenes <- FindAllMarkers(seuratmLN, only.pos=T) %>% 
+  dplyr::filter(p_val_adj < 0.01)
+```
+
+#### features
+```{r featureplot sel genes}
+genes <- data.frame(gene=rownames(seuratmLN)) %>% 
+    mutate(geneID=gsub("^.*\\.", "", gene)) 
+
+selGenesAll <- data.frame(geneID=c("Clu", "Ccl21a", "Grem1", "Grem2","Mfap4", "Ccl19","Cd34", "Col6a1",
+                    "Col6a2","Rosa26eyfp", "Cxcl13", "Icam1", "Vcam1")) %>% 
+  left_join(., genes, by = "geneID") 
+
+pList <- sapply(selGenesAll$gene, function(x){
+p <- FeaturePlot(seuratmLN, reduction = "umap", 
+            features = x,
+            cols=c("lightgrey", "darkred"),
+            order = F)+
+  theme(legend.position="right")
+  plot(p)
+})
+```
+
+```{r featureplot sel genes-2}
+selGenesAll <- data.frame(geneID=c("Fbln1", "Col15a1", "Cnn1", "Acta2", "Rgs5",
+                                   "Cox4i2", "Pi16", "Cd34", "Emp1", "Ogn",
+                                   "Fhl2")) %>% 
+  left_join(., genes, by = "geneID") 
+
+pList <- sapply(selGenesAll$gene, function(x){
+p <- FeaturePlot(seuratmLN, reduction = "umap", 
+            features = x,
+            cols=c("lightgrey", "darkred"),
+            order = F)+
+  theme(legend.position="right")
+  plot(p)
+})
+```
+
+```{r}
+selGenesfil <- c("ENSMUSG00000026395.Ptprc", "ENSMUSG00000031004.Mki67", "ENSMUSG00000063011.Msln", "ENSMUSG00000045680.Tcf21")
+
+pList <- sapply(selGenesfil, function(x){
+  p <- FeaturePlot(seuratmLN, reduction = "umap", 
+            features = x, 
+            cols=c("lightgrey", "darkred"),
+            order = T)+
+  theme(legend.position="right")
+  plot(p)
+})
+```
+
+### filter 
+```{r filter object 3, eval=FALSE, include=TRUE}
+## filter out Ptprc+ cells (cluster #12), 
+## and pancreatic cells (#15),
+## and mesothelial cells (cluster#8) 
+## and epithelial/neuronal cells (#11)
+## and proliferating cells (cluster #5 and #7)
+
+table(seuratmLN$RNA_snn_res.0.4)
+seuratF <- subset(seuratmLN, RNA_snn_res.0.4 %in% c("12", "15", "8", "11", "5", "7"), invert = TRUE)
+table(seuratF$RNA_snn_res.0.4)
+
+seuratmLNf3 <- seuratF
+remove(seuratF)
+table(seuratmLNf3$orig.ident)
+```
+
+#### rerun 
+```{r rerun mLNf3, eval=FALSE, include=TRUE}
+## rerun seurat
+seuratmLNf3 <- NormalizeData (object = seuratmLNf3)
+seuratmLNf3 <- FindVariableFeatures(object = seuratmLNf3)
+seuratmLNf3 <- ScaleData(object = seuratmLNf3, verbose = TRUE)
+seuratmLNf3 <- RunPCA(object=seuratmLNf3, npcs = 30, verbose = FALSE)
+seuratmLNf3 <- RunTSNE(object=seuratmLNf3, reduction="pca", dims = 1:20)
+seuratmLNf3 <- RunUMAP(object=seuratmLNf3, reduction="pca", dims = 1:20)
+seuratmLNf3 <- FindNeighbors(object = seuratmLNf3, reduction = "pca", dims= 1:20)
+
+res <- c(0.25, 0.6, 0.8, 0.4)
+for (i in 1:length(res)) {
+  seuratmLNf3 <- FindClusters(object = seuratmLNf3, resolution = res[i], random.seed = 1234)
+}
+```
+
+### load object mLN EYFP+ fil
+```{r load object mLNf3}
+fileNam <- paste0(basedir, "/data/LNmLToRev_EYFP_mLNf3_seurat.rds")
+seuratmLNf3 <- readRDS(fileNam)
+table(seuratmLNf3$dataset)
+```
+
+### dimplot
+#### clustering
+```{r dimplot clustering mLNf3}
+colPal <- c("#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#b66e8d",
+            "#61a4ba", "#6178ba", "#54a87f",  "#25328a",
+            "#b6856e", "#0073C2FF", "#EFC000FF", "#868686FF", "#CD534CFF", 
+            "#7AA6DCFF", "#003C67FF", "#8F7700FF", "#3B3B3BFF", "#A73030FF",
+            "#4A6990FF")[1:length(unique(seuratmLNf3$RNA_snn_res.0.4))]
+names(colPal) <- unique(seuratmLNf3$RNA_snn_res.0.4)
+
+DimPlot(seuratmLNf3, reduction = "umap", group.by = "RNA_snn_res.0.4",
+        cols = colPal, label = TRUE)+
+  theme_bw() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank(), 
+        panel.grid.minor = element_blank()) +
+  xlab("UMAP1") +
+  ylab("UMAP2")
+```
+
+#### timepoint
+```{r dimplot timepoint mLNf3}
+DimPlot(seuratmLNf3, reduction = "umap", group.by = "timepoint",
+        cols = coltimepoint)+
+  theme_bw() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank(), 
+        panel.grid.minor = element_blank()) +
+  xlab("UMAP1") +
+  ylab("UMAP2")
+```
+
+### label transfer
+```{r transfer label}
+fileNam <- paste0(basedir, "/data/LNmLToRev_adultonly_seurat.integrated.rds")
+seuratLab <- readRDS(fileNam)
+
+seuratLab <- subset(seuratLab, location=="mLN")
+seuratLab <- subset(seuratLab, EYFP=="pos")
+table(seuratLab$label)
+```
+
+#### dimplot label
+```{r transfer label-2}
+labCells <- data.frame(label=seuratLab$label) %>% rownames_to_column(., "cell")
+allCell <- data.frame(cell=colnames(seuratmLNf3)) %>% 
+  left_join(., labCells, by= "cell")
+allCell$label[which(is.na(allCell$label))] <- "unassigned"
+seuratmLNf3$label <- allCell$label
+
+table(seuratmLNf3$timepoint)
+table(seuratmLNf3$label)
+
+colLab <- c("#42a071", "#900C3F","#b66e8d", "#61a4ba", "#424671", "#003C67FF",
+            "#e3953d", "#714542", "#b6856e", "#a4a4a4")
+
+names(colLab) <- c("FDC/MRC", "TRC", "TBRC", "MedRC/IFRC", "MedRC" , "actMedRC",
+                   "PRC", "Pi16+RC", "VSMC", "unassigned")
+
+DimPlot(seuratmLNf3, reduction = "umap", group.by = "label",
+        cols = colLab, shuffle=T)+
+  theme_bw() +
+  theme(axis.text = element_blank(), axis.ticks = element_blank(), 
+        panel.grid.minor = element_blank()) +
+  xlab("UMAP1") +
+  ylab("UMAP2")
+```
+
+```{r transfer label-3}
+DimPlot(seuratmLNf3, reduction = "umap", group.by = "label", pt.size=0.5,
+        cols = colLab, order = TRUE)+
+  theme_void()
+
+DimPlot(seuratmLNf3, reduction = "umap", group.by = "label", pt.size=0.5,
+        cols = colLab, shuffle = FALSE)+
+  theme_void()
+```
+
+#### calculate cluster marker genes mLNf3
+```{r marker RNA_snn_res.0.4 mLNf3, include=TRUE, eval=FALSE}
+##cluster marker
+Idents(seuratmLNf3) <- seuratmLNf3$RNA_snn_res.0.4
+markerGenes <- FindAllMarkers(seuratmLNf3, only.pos=T) %>% 
+  dplyr::filter(p_val_adj < 0.01)
+```
+
+### features
+```{r vis markers mLNf3}
+genes <- data.frame(gene=rownames(seuratmLNf3)) %>% 
+    mutate(geneID=gsub("^.*\\.", "", gene)) 
+
+selGenesAll <- data.frame(geneID=c("Rosa26eyfp","tdTomato", "Ccl19", "Ccl21a", "Cxcl13",
+                                   "Fbln1", "Col15a1", "Cnn1", "Acta2","Myh11", "Rgs5",
+                                   "Cox4i2", "Pi16", "Cd34", "Emp1", "Ogn","Des",
+                                   "Fhl2", "Bmp2", "Bmp4", "Grem1", "Grem2", "Bmpr1a", "Bmpr1b", "Bmpr2")) %>% 
+  left_join(., genes, by = "geneID") 
+
+pList <- sapply(selGenesAll$gene, function(x){
+p <- FeaturePlot(seuratmLNf3, reduction = "umap", 
+            features = x,
+            cols=c("lightgrey", "darkred"),
+            order = F) +
+  theme(legend.position="right")
+  plot(p)
+})
+```
+
+```{r save object mLNf3, eval=FALSE, include=TRUE}
+## save object
+saveRDS(seuratmLNf3, file=paste0(basedir,"/data/LNmLToRev_EYFP_mLNf3_seurat.rds"))
+```
+
+### slingshot
+```{r slingshot mLNf3 v2, eval=FALSE, include=TRUE}
+sce <- as.SingleCellExperiment(seuratmLNf3)
+sce <- slingshot(sce, clusterLabels = 'RNA_snn_res.0.4', reducedDim = 'UMAP',
+                 start.clus = "1", end.clus = c("12", "3", "4", "7", "6"),
+                 dist.method="simple", extend = 'n', stretch=0)
+```
+
+#### load slingshot sce object mLN EYFP+
+```{r load sce mLNf3 slingshot v2}
+fileNam <- paste0(basedir, "/data/LNmLToRev_EYFP_mLNf3_slingshot_v2_sce.rds")
+scemLNf3v2 <- readRDS(fileNam)
+```
+
+```{r slingshot mLNf3-2 v2}
+clustDat <- data.frame(clustCol=colPal) %>% rownames_to_column(., "cluster")
+timepointDat <- data.frame(ageCol=coltimepoint) %>% rownames_to_column(., "timepoint")
+colDat <- data.frame(cluster=scemLNf3v2$RNA_snn_res.0.4) %>%
+  mutate(timepoint=scemLNf3v2$timepoint) %>% left_join(., clustDat, by="cluster") %>% 
+  left_join(., timepointDat, by="timepoint")
+```
+
+```{r slingshot-1 mLNf3 v2}
+plot(reducedDims(scemLNf3v2)$UMAP, col = colDat$clustCol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, type = 'lineages', col = 'black')
+```
+
+```{r slingshot-2 mLNf3 v2}
+plot(reducedDims(scemLNf3v2)$UMAP, col = colDat$ageCol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, type = 'lineages', col = 'black')
+```
+
+```{r slingshot-3 mLNf3 v2}
+plot(reducedDims(scemLNf3v2)$UMAP, col = colDat$clustCol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, col='black')
+```
+
+```{r slingshot-4 mLNf3 v2}
+plot(reducedDims(scemLNf3v2)$UMAP, col = colDat$ageCol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, col='black')
+```
+
+```{r save slingshot mLNf3 v2, eval=FALSE, include=TRUE}
+saveRDS(sce, file=paste0(basedir,"/data/LNmLToRev_EYFP_mLNf3_slingshot_v2_sce.rds"))
+```
+
+```{r}
+summary(scemLNf3v2$slingPseudotime_1)
+summary(scemLNf3v2$slingPseudotime_2)
+summary(scemLNf3v2$slingPseudotime_3)
+summary(scemLNf3v2$slingPseudotime_4)
+summary(scemLNf3v2$slingPseudotime_5)
+```
+
+```{r}
+colors <- colorRampPalette(rev(brewer.pal(11,'Spectral')))(100)
+plotcol <- colors[cut(slingAvgPseudotime(SlingshotDataSet(scemLNf3v2)), breaks=100)]
+
+plot(reducedDims(scemLNf3v2)$UMAP, col = plotcol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, col='black')
+```
+
+```{r}
+colors <- colorRampPalette(brewer.pal(11,'YlOrRd'))(100)
+plotcol <- colors[cut(slingAvgPseudotime(SlingshotDataSet(scemLNf3v2)), breaks=100)]
+
+plot(reducedDims(scemLNf3v2)$UMAP, col = plotcol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, col='black')
+```
+
+```{r}
+colors <- colorRampPalette(brewer.pal(11,'YlGnBu'))(100)
+plotcol <- colors[cut(slingAvgPseudotime(SlingshotDataSet(scemLNf3v2)), breaks=100)]
+
+plot(reducedDims(scemLNf3v2)$UMAP, col = plotcol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, col='black')
+```
+
+```{r}
+colors <- colorRampPalette(brewer.pal(11,'PuOr')[-6])(100)
+plotcol <- colors[cut(slingAvgPseudotime(SlingshotDataSet(scemLNf3v2)), breaks=100)]
+
+plot(reducedDims(scemLNf3v2)$UMAP, col = plotcol, pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=2, col='black')
+```
+
+
+```{r}
+### color lineages
+colLin <- c("#42a071","#900C3F","#424671","#e3953d","#b6856e")
+names(colLin) <- c("1", "2", "3", "4", "5")
+
+plot(reducedDims(scemLNf3v2)$UMAP, col = "#bfbcbd", pch=16, asp = 1)
+lines(SlingshotDataSet(scemLNf3v2), lwd=4, col=colLin)
+```
+
+### session info
+```{r date and session info}
+date()
+sessionInfo()
+```
