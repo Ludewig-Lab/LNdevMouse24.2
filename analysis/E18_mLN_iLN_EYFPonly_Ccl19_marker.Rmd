@@ -1,5 +1,5 @@
 ---
-title: "E18 mLN pLN Cxcl13EYFP+"
+title: "E18 mLN pLN Ccl19EYFP+ "
 author: "A.DeMartin"
 date: "2025-05-23"
 output: 
@@ -46,6 +46,7 @@ library(VennDiagram)
 library(NCmisc)
 library(slingshot)
 library(here)
+library(RColorBrewer)
 ```
 
 #### set color vectors 
@@ -57,23 +58,20 @@ collocation <- c("#61baba", "#ba6161")
 names(collocation) <- c("iLN", "mLN")
 ```
 
-#### load object all
-```{r}
+### load object all
+```{r load merged object all}
 basedir <- here()
-fileNam <- paste0(basedir, "/data/LNmLToRev_allmerged_seurat.rds")
+fileNam <- paste0(basedir, "/data/AllSamplesMerged_seurat.rds")
 seuratM <- readRDS(fileNam)
-table(seuratM$timepoint)
-table(seuratM$orig.ident)
+table(seuratM$age)
 ```
 
 #### subset E18
-```{r}
-seuratA <- subset(seuratM, timepoint == "E18")
-table(seuratA$timepoint)
+```{r subset E18 datasets}
+seuratA <- subset(seuratM, age == "E18")
+table(seuratA$age)
 
-seuratA <- JoinLayers(seuratA)
-
-#rerun seurat
+## rerun seurat
 seuratA <- NormalizeData (object = seuratA)
 seuratA <- FindVariableFeatures(object = seuratA)
 seuratA <- ScaleData(object = seuratA, verbose = TRUE)
@@ -111,12 +109,13 @@ DimPlot(seuratA, reduction = "umap", group.by = "location" ,
   xlab("umap1") +
   ylab("umap2")
 ```
-### features
+
+#### features
 ```{r featureplot sel genes pre filter}
 genes <- data.frame(gene=rownames(seuratA)) %>% 
     mutate(geneID=gsub("^.*\\.", "", gene)) 
 
-selGenes <- data.frame(geneID=c("Ptprc", "Msln", "Mki67", "Kcnn3", "Tcf21", "Pecam1", "Lyve1", "Ccl21a", "Icam1", "Cd34")) %>% 
+selGenes <- data.frame(geneID=c("Ptprc", "Msln", "Mki67", "Kcnn3", "Tcf21", "Pecam1", "Lyve1", "Ccl21a", "Icam1", "Cd34", "Mrc1", "Rosa26eyfp", "Krt19", "Acta2","Myh11", "Cxcl13", "Epcam", "Adipoq")) %>% 
   left_join(., genes, by = "geneID") 
 
 pList <- sapply(selGenes$gene, function(x){
@@ -129,19 +128,20 @@ pList <- sapply(selGenes$gene, function(x){
 })
 ```
 
-### filter 
+#### filter 
 ```{r filter object, eval=FALSE, include=TRUE}
-## filter Ptprc+ cells (cluster #7 and #14)
+## filter and Pecam+ cells (cluster 15)
+## filter immune cells (cluseter 14)
 table(seuratA$RNA_snn_res.0.25)
-seuratF <- subset(seuratA, RNA_snn_res.0.25 %in% c("7", "14"), invert = TRUE)
+seuratF <- subset(seuratA, RNA_snn_res.0.25 %in% c("15", "14"), invert = TRUE)
 table(seuratF$RNA_snn_res.0.25)
 
 seuratE18fil <- seuratF
 remove(seuratF)
 ```
 
-### rerun after fil
-```{r rerun after fil, eval=FALSE, include=TRUE}
+#### rerun after fil
+```{r rerun after fil, eval=FALSE, include=FALSE}
 #rerun seurat
 seuratE18fil <- NormalizeData (object = seuratE18fil)
 seuratE18fil <- FindVariableFeatures(object = seuratE18fil)
@@ -157,9 +157,9 @@ for (i in 1:length(res)) {
 }
 ```
 
-### load object fil
+#### load object fil
 ```{r load object E18fil}
-fileNam <- paste0(basedir, "/data/LNmLToRev_E18fil_seurat.rds")
+fileNam <- paste0(basedir, "/data/E18fil_seurat.rds")
 seuratE18fil <- readRDS(fileNam)
 ```
 
@@ -194,19 +194,12 @@ DimPlot(seuratE18fil, reduction = "umap", group.by = "location",
   ylab("UMAP2")
 ```
 
-```{r, eval=FALSE, eval=FALSE, include=TRUE}
-saveRDS(seuratE18fil, file=paste0(basedir,"/data/LNmLToRev_E18fil_seurat.rds"))
+```{r, eval=FALSE, include=TRUE}
+saveRDS(seuratE18fil, file=paste0(basedir, "/data/E18fil_seurat.rds"))
 ```
 
 ### subset EYFP expressing cells
 ```{r subset EYFP pos cells, eval=FALSE, include=TRUE}
-seuratSub <- subset(seuratE18fil, Rosa26eyfp.Rosa26eyfp>0)
-eyfpPos <- colnames(seuratSub)
-
-seuratE18fil$EYFP <- "neg"
-seuratE18fil$EYFP[which(colnames(seuratE18fil)%in%eyfpPos)] <- "pos"
-table(seuratE18fil$dataset, seuratE18fil$EYFP)
-
 table(seuratE18fil$EYFP)
 seuratE18EYFPv2 <- subset(seuratE18fil, EYFP == "pos")
 table(seuratE18EYFPv2$EYFP)
@@ -230,12 +223,12 @@ for (i in 1:length(res)) {
 ```
 
 ```{r, eval=FALSE, include=TRUE}
-saveRDS(seuratE18EYFPv2, file=paste0(basedir,"/data/E18_EYFPv2_seurat.rds")
+saveRDS(seuratE18EYFPv2, file=paste0(basedir, "/data/E18_EYFPv2_Ccl19_seurat.rds"))
 ```
 
 ### load object E18 EYFP+
 ```{r}
-fileNam <- paste0(basedir, "/data/E18_EYFPv2_seurat.rds")
+fileNam <- paste0(basedir, "/data/E18_EYFPv2_Ccl19_seurat.rds")
 seuratE18EYFPv2 <- readRDS(fileNam)
 ```
 
@@ -259,7 +252,7 @@ DimPlot(seuratE18EYFPv2, reduction = "umap", group.by = "RNA_snn_res.0.25",
   ylab("UMAP2")
 ```
 
-### location
+#### location
 ```{r dimplot loction E18 EYFP v2}
 DimPlot(seuratE18EYFPv2, reduction = "umap", group.by = "location",
         cols = collocation)+
@@ -288,7 +281,7 @@ pList <- sapply(selGenes$gene, function(x){
 })
 ```
 
-### integrate data across location 
+### integrate data across location
 ```{r integrate v2, eval=FALSE, include=TRUE}
 Idents(seuratE18EYFPv2) <- seuratE18EYFPv2$location
 
@@ -319,9 +312,13 @@ for (i in 1:length(res)){
 }
 ```
 
+```{r, eval=FALSE, include=TRUE}
+saveRDS(seuratE18EYFPv2.int, file=paste0(basedir, "/data/E18EYFPv2_integrated_Ccl19_seurat.rds"))
+```
+
 ### load object E18 EYFP+ integrated
 ```{r}
-fileNam <- paste0(basedir, "/data/E18EYFPv2_integrated_seurat.rds")
+fileNam <- paste0(basedir, "/data/E18EYFPv2_integrated_Ccl19_seurat.rds")
 seuratE18EYFPv2.int <- readRDS(fileNam)
 ```
 
@@ -361,49 +358,33 @@ DimPlot(seuratE18EYFPv2.int, reduction = "umap", group.by = "location", cols = c
   ylab("umap2")
 ```
 
-### features E18 EYFP int
-```{r featureplot E18 EYFP only int v2}
-genes <- data.frame(gene=rownames(seuratE18EYFPv2.int)) %>% 
-    mutate(geneID=gsub("^.*\\.", "", gene)) 
-
-selGenes <- data.frame(geneID=c("Rosa26eyfp", "Mki67", "Acta2", "Myh11", "Mcam", "Ccl19", "Cxcl13", "Cd34", "Icam1","Vcam1", "Pi16", "Bmp4", "Fmod", "Adipoq", "Msln", "Kcnn3")) %>% 
-  left_join(., genes, by = "geneID") 
-
-pList <- sapply(selGenes$gene, function(x){
-  p <- FeaturePlot(seuratE18EYFPv2.int, reduction = "umap", 
-            features = x, 
-            cols=c("lightgrey","darkred"),
-            order = T)+
-  theme(legend.position="right")
-  plot(p)
-})
-```
-
 #### assign label
 ```{r assign label int clusters v2}
 seuratE18EYFPv2.int$label <- "label"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "0")] <- "cluster2"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "1")] <- "cluster3"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "2")] <- "Prolif"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "3")] <- "cluster1"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "4")] <- "cluster4"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "5")] <- "Neuronal1"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "0")] <- "cluster1"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "1")] <- "Prolif"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "2")] <- "cluster3"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "3")] <- "cluster4"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "4")] <- "cluster2"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "5")] <- "Adipoc"
 seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "6")] <- "Mesothelial"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "7")] <- "Neuronal2"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "8")] <- "cluster5"
-table(seuratE18EYFPv2.int$label)
 
+table(seuratE18EYFPv2.int$label)
 ##order
-seuratE18EYFPv2.int$label <- factor(seuratE18EYFPv2.int$label, levels = c("cluster1", "cluster2", "cluster3", "cluster4", "cluster5", "Neuronal1","Neuronal2", "Mesothelial", "Prolif"))
+seuratE18EYFPv2.int$label <- factor(seuratE18EYFPv2.int$label, levels = c("cluster1", "cluster2", "cluster3", "cluster4", "Adipoc", "Mesothelial", "Prolif"))
 table(seuratE18EYFPv2.int$label)
 
 colLab <- c("#900C3F","#b66e8d", "#003C67FF",
-            "#e3953d", "#714542", "#b6856e", "lightblue","grey", "black")
-names(colLab) <- c("cluster1", "cluster2", "cluster3", "cluster4", "cluster5", "Neuronal1","Neuronal2", "Mesothelial", "Prolif")
+            "#e3953d", "#714542", "#b6856e","grey")
+names(colLab) <- c("cluster1", "cluster2", "cluster3", "cluster4", "Adipoc", "Mesothelial", "Prolif")
 ```
 
 #### label
 ```{r umap int label v2}
+colLab <- c("#900C3F","#b66e8d", "#003C67FF",
+            "#e3953d", "#714542", "#b6856e","grey")
+names(colLab) <- c("cluster1", "cluster2", "cluster3", "cluster4", "Adipoc", "Mesothelial", "Prolif")
+
 DimPlot(seuratE18EYFPv2.int, reduction = "umap", group.by = "label", cols = colLab)+
   theme_bw() +
   theme(axis.text = element_blank(), axis.ticks = element_blank(), 
@@ -421,19 +402,12 @@ DimPlot(seuratE18EYFPv2.int, reduction = "umap", group.by = "label", pt.size=0.5
   theme(legend.position = "none") 
 ```
 
-### dotplot FRC marker E18 EYFP+ int
-```{r dotplot FRC marker v2, fig.height=8, fig.width=6}
-seurat_markers <- data.frame(gene=c("Fcgr2b","Fcer2a","Cr2","Cxcl13",
-                                    "Slc7a11", "Ccl19", 
-                                    "Ccl21a", "Fmod", "Grem1", "Bmp4",
-                                    "Tnfsf11", "Fbn2",
-                                    "Pltp" ,"C1rb", "Lepr", "Ptn",
-                                     "Nr4a1", "Cxcl10", "Cxcl9", 
-                                    "F3", "Fbln1", "Gdf10", "Adamtsl1", 
-                                    "Col15a1",  "Cd34",
-                                    "Igfbp6", "Pi16", "Thy1", "Dpp4", "Sema3c", 
-                                    "Acta2", "Myh11", "Mcam", "Itga7", "Esam", "Rgs4", "Adipoq", "Mki67", "Msln", "Kcnn3", "Tcf21"
-                                    ))
+### dotplot FRC marker E18 EYFP+ int 
+```{r dotplot FRC marker v2, fig.height=10, fig.width=6}
+seurat_markers <- data.frame(gene=c("Vcam1", "Icam1",
+                                    "Cxcl13", "Ccl19", "Ccl21a","Tnfsf11", "Grem1","Ifitm1","Cxcl1","Ifitm3","Ccl2","Nfkbia","Des",
+                                    "Mfap5","Cdkn1c","Akap12","Anxa2","Lox","Gsn","Basp1","Fndc1","Sparc","Col1a1","Fbn2","Nr4a1","Fbln1","Cd34","Pi16",
+                                    "Fbln5","Tm4sf1", "Ntrk3", "Fhl1", "Rgs7bp", "Adamts2", "Mpped2", "Ramp1", "Pdgfrl", "Eln", "Hspb2","Mgp", "Actg2","Acta2", "Myh11","Mcam","Adipoq", "Mki67", "Msln"))
 
 genes <- data.frame(geneID=rownames(seuratE18EYFPv2.int)) %>%
   mutate(gene=gsub(".*\\.", "",  geneID)) 
@@ -453,15 +427,12 @@ DotPlot(seuratE18EYFPv2.int, assay="RNA", features = rev(markerAll$geneID), scal
   xlab("") + ylab("")
 ```
 
-```{r, eval=FALSE, include=TRUE}
-saveRDS(seuratE18EYFPv2.int, file=paste0(basedir,"/data/E18EYFPv2_integrated_seurat.rds")
-```
-
 ### subset FRCs and rerun
 ```{r}
 table(seuratE18EYFPv2.int$label)
-seuratE18EYFPv2.int <- subset(seuratE18EYFPv2.int, label %in% c("Neuronal1", "Neuronal2", "Mesothelial"), invert = TRUE)
+seuratE18EYFPv2.int <- subset(seuratE18EYFPv2.int, label %in% c("Adipoc", "Mesothelial"), invert = TRUE)
 table(seuratE18EYFPv2.int$label)
+table(seuratE18EYFPv2.int$orig.ident)
 
 ## rerun seurat
 DefaultAssay(object = seuratE18EYFPv2.int) <- "integrated"
@@ -518,20 +489,17 @@ DimPlot(seuratE18EYFPv2.int, reduction = "umap", group.by = "location", cols = c
 #### assign label
 ```{r assign label int clusters v2 mLTo only}
 seuratE18EYFPv2.int$label <- "label"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "0")] <- "cluster3"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "1")] <- "cluster1"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "2")] <- "cluster2"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "3")] <- "cluster4"
-seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "4")] <- "cluster5"
-table(seuratE18EYFPv2.int$label)
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "0")] <- "cluster2"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "1")] <- "cluster3"
+seuratE18EYFPv2.int$label[which(seuratE18EYFPv2.int$intCluster == "2")] <- "cluster1"
 
+table(seuratE18EYFPv2.int$label)
 ##order
-seuratE18EYFPv2.int$label <- factor(seuratE18EYFPv2.int$label, levels = c("cluster2", "cluster3", "cluster4", "cluster5", "cluster1"))
+seuratE18EYFPv2.int$label <- factor(seuratE18EYFPv2.int$label, levels = c("cluster2", "cluster3", "cluster1"))
 table(seuratE18EYFPv2.int$label)
 
-colLab <- c("#900C3F","#b66e8d", "#003C67FF",
-            "#e3953d", "#714542", "#b6856e")
-names(colLab) <- c("cluster2", "cluster3", "cluster1", "cluster4", "cluster5")
+colLab <- c("#900C3F","#b66e8d", "#003C67FF")
+names(colLab) <- c("cluster2", "cluster3", "cluster1")
 ```
 
 #### label
@@ -553,7 +521,25 @@ DimPlot(seuratE18EYFPv2.int, reduction = "umap", group.by = "label", pt.size=0.5
   theme(legend.position = "none") 
 ```
 
-### dotplot marker E18 EYFP+ fil
+### featrue Ccl19 
+```{r feature Ccl19}
+genes <- data.frame(gene=rownames(seuratE18EYFPv2.int)) %>% 
+    mutate(geneID=gsub("^.*\\.", "", gene)) 
+
+selGenes <- data.frame(geneID=c("Ccl19")) %>% 
+  left_join(., genes, by = "geneID") 
+
+pList <- sapply(selGenes$gene, function(x){
+  p <- FeaturePlot(seuratE18EYFPv2.int, reduction = "umap", 
+            features = x, 
+            cols=c("lightgrey","darkred"),
+            order = FALSE)+
+  theme(legend.position="right")
+  plot(p)
+})
+```
+
+## dotplot marker E18 EYFP+ fil
 ```{r dotplot FRC marker v2 mLTo only, fig.height=10, fig.width=6}
 seurat_markers <- data.frame(gene=c("Vcam1", "Icam1",
                                     "Cxcl13", "Ccl19", "Ccl21a","Tnfsf11", "Grem1","Ifitm1","Cxcl1","Ifitm3","Ccl2","Nfkbia","Des",
@@ -578,9 +564,8 @@ DotPlot(seuratE18EYFPv2.int, assay="RNA", features = rev(markerAll$geneID), scal
   xlab("") + ylab("")
 ```
 
-###signatures
-#### convert to sce 
-```{r convert to sce mLTo only}
+### signatures
+```{r}
 ## convert seurat object to sce object
 ## exteract logcounts
 logcounts <- GetAssayData(seuratE18EYFPv2.int, assay = "RNA", slot = "data")
@@ -604,8 +589,7 @@ genes <- data.frame(geneID=rownames(sce)) %>% mutate(gene=gsub(".*\\.", "", gene
 pal = colorRampPalette(c("#053061", "#2166ac", "#f7f7f7", "#f4a582", "#b2183c", "#85122d"))
 ```
 
-### signatures
-```{r}
+```{r signature cluster2}
 selGenes <- data.frame(gene=c("Cxcl13", "Ccl19", "Ccl21a","Tnfsf11", "Grem1"))
 signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
 
@@ -619,13 +603,12 @@ sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 3))
 sceSub$sign2[which(sceSub$sign > 3)] <- 3
 ##check max and min values
 max(sceSub$sign)
-min(sceSub$sign)
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
   theme(legend.position = "none")
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
 ```
 
-```{r}
+```{r signature cluster3 -1}
 selGenes <- data.frame(gene=c("Mfap5","Gsn","Fndc1","Col1a1","Cd34"))
 signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
 
@@ -639,13 +622,12 @@ sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 3))
 sceSub$sign2[which(sceSub$sign > 3)] <- 3
 ##check max and min values
 max(sceSub$sign)
-min(sceSub$sign)
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
   theme(legend.position = "none")
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
 ```
 
-```{r}
+```{r signature cluster3 -2}
 selGenes <- data.frame(gene=c("Fbln5","Eln","Actg2","Acta2","Myh11"))
 signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
 
@@ -664,8 +646,7 @@ plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
 ```
 
-### plot signature 3/4 combined
-```{r}
+```{r signature cluster3 all}
 selGenes <- data.frame(gene=c("Fbln5","Eln","Actg2","Acta2","Myh11","Mfap5","Gsn","Fndc1","Col1a1","Cd34"))
 signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
 
@@ -684,7 +665,7 @@ plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
 ```
 
-```{r}
+```{r proiferation signature}
 selGenes <- data.frame(gene=c("Mki67", "Ccna2", "Cdca8", "Prc1", "Aurkb"))
 signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
 
@@ -703,218 +684,324 @@ plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
 ```
 
-#### featrue Ccl19
-```{r feature Ccl19}
-genes <- data.frame(gene=rownames(seuratE18EYFPv2.int)) %>% 
-    mutate(geneID=gsub("^.*\\.", "", gene)) 
+### GSEA 
+#### calculate marker genes 
+```{r, include=TRUE, eval=FALSE}
+## calculate marker genes
+DefaultAssay(object = seuratE18EYFPv2.int) <- "RNA"
+Idents(seuratE18EYFPv2.int) <- seuratE18EYFPv2.int$label
+levels(seuratE18EYFPv2.int)
 
-selGenes <- data.frame(geneID=c("Ccl19")) %>% 
-  left_join(., genes, by = "geneID") 
-
-pList <- sapply(selGenes$gene, function(x){
-  p <- FeaturePlot(seuratE18EYFPv2.int, reduction = "umap", 
-            features = x, 
-            cols=c("lightgrey","darkred"),
-            order = FALSE)+
-  theme(legend.position="right")
-  plot(p)
-})
+markerGenes <- FindAllMarkers(seuratE18EYFPv2.int, only.pos=T) %>% 
+  dplyr::filter(p_val_adj < 0.01) 
 ```
 
-
-### subset Ccl19 positive cells
-```{r}
-seuratCcl19 <- subset(seuratE18EYFPv2.int, ENSMUSG00000071005.Ccl19 > 0)
-table(seuratE18EYFPv2.int$orig.ident)
-table(seuratCcl19$orig.ident)
+```{r, include=TRUE, eval=FALSE}
+#save table
+write.table(markerGenes, 
+            file= paste0(basedir, "/data/markerGenes_E18_EYFPpos_integrated_fil_label.txt",
+            sep="\t",
+            quote=F,
+            row.names=F,
+            col.names=T)
 ```
 
-#### rerun Ccl19 positive only
-```{r}
-## rerun seurat
-DefaultAssay(object = seuratCcl19) <- "integrated"
-seuratCcl19 <- ScaleData(object = seuratCcl19, verbose = FALSE,
-                         features = rownames(seuratCcl19))
-seuratCcl19 <- RunPCA(object = seuratCcl19, npcs = 20, verbose = FALSE)
-seuratCcl19 <- RunTSNE(object = seuratCcl19, recuction = "pca", dims = 1:20)
-seuratCcl19 <- RunUMAP(object = seuratCcl19, recuction = "pca", dims = 1:20)
+#### run GSEA on cluster2
+```{r GSEA cluster2, fig.height=12, fig.width=12}
+## load marker genes
+markerGenes <- read.delim(paste0(basedir, "/data/markerGenes_E18_EYFPpos_integrated_fil_label.txt"), header = TRUE, sep = "\t")
 
-seuratCcl19 <- FindNeighbors(object = seuratCcl19, reduction = "pca", dims = 1:20)
-res <- c(0.1, 0.6, 0.8, 0.4, 0.25)
-for (i in 1:length(res)){
-  seuratCcl19 <- FindClusters(object = seuratCcl19, resolution = res[i],
-                              random.seed = 1234)
+markerProlif <- dplyr::filter(markerGenes, cluster == "cluster2")
+markerProlif <- markerProlif%>%
+  mutate(Gene=gsub("^.*\\.", "", gene))  %>%
+  mutate(EnsID=gsub("\\..*","", gene))
+
+##GSEA 
+ego <- enrichGO(gene = unique(markerProlif$EnsID),
+                          OrgDb = org.Mm.eg.db,
+                          keyType = 'ENSEMBL',
+                          ont = "BP",
+                          pAdjustMethod = "BH",
+                          pvalueCutoff = 0.05,
+                          qvalueCutoff = 0.05)
+ego <- setReadable(ego, OrgDb = org.Mm.eg.db)
+dotplot(ego, showCategory=30)
+```
+
+#### run GSEA on cluster3
+```{r GSEA cluster3, fig.height=12, fig.width=12}
+markerProlif <- dplyr::filter(markerGenes, cluster == "cluster3")
+markerProlif <- markerProlif%>%
+  mutate(Gene=gsub("^.*\\.", "", gene))  %>%
+  mutate(EnsID=gsub("\\..*","", gene))
+
+##GSEA Gran
+ego <- enrichGO(gene = unique(markerProlif$EnsID),
+                          OrgDb = org.Mm.eg.db,
+                          keyType = 'ENSEMBL',
+                          ont = "BP",
+                          pAdjustMethod = "BH",
+                          pvalueCutoff = 0.05,
+                          qvalueCutoff = 0.05)
+ego <- setReadable(ego, OrgDb = org.Mm.eg.db)
+dotplot(ego, showCategory=30)
+```
+
+#### run GSEA on cluster1
+```{r GSEA cluster1, fig.height=12, fig.width=12}
+markerProlif <- dplyr::filter(markerGenes, cluster == "cluster1")
+markerProlif <- markerProlif%>%
+  mutate(Gene=gsub("^.*\\.", "", gene))  %>%
+  mutate(EnsID=gsub("\\..*","", gene))
+
+##GSEA Gran
+ego <- enrichGO(gene = unique(markerProlif$EnsID),
+                          OrgDb = org.Mm.eg.db,
+                          keyType = 'ENSEMBL',
+                          ont = "BP",
+                          pAdjustMethod = "BH",
+                          pvalueCutoff = 0.05,
+                          qvalueCutoff = 0.05)
+ego <- setReadable(ego, OrgDb = org.Mm.eg.db)
+dotplot(ego, showCategory=30)
+```
+
+### project signatures
+#### stem cell population maintenance
+```{r stem cell population maintenance}
+ego1 <- dplyr::filter(ego@result,ego@result$Description=="stem cell population maintenance")
+g1 <- ego1$geneID
+Str <-(g1)
+StrSub <- strsplit(Str, "/")
+df <- as.data.frame(StrSub)
+colnames(df) <- c("gene")
+
+##make a count matrix of signature genes
+signGenes <- genes %>% dplyr::filter(gene %in% df$gene)
+
+sceSub <- sce[which(rownames(sce) %in% signGenes$geneID),]
+cntMat <- rowSums(t(as.matrix(
+    sceSub@assays@data$logcounts)))/nrow(signGenes)
+sceSub$sign <- cntMat
+sceSub$sign2 <- sceSub$sign
+sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 0.6))
+sceSub$sign2[which(sceSub$sign > 0.6)] <- 0.6
+sceSub$sign2[which(sceSub$sign < 0)] <- 0
+##check max and min values
+max(sceSub$sign)
+min(sceSub$sign)
+plotUMAP(sceSub, colour_by = "sign2") + sc +
+  theme(legend.position = "none", point_size = 1)
+plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
+```
+
+```{r heatmap funcion}
+avgHeatmap <- function(seurat, selGenes, colVecIdent, colVecCond=NULL,
+                       ordVec=NULL, gapVecR=NULL, gapVecC=NULL,cc=FALSE,
+                       cr=FALSE, condCol=FALSE){
+  
+  selGenes <- selGenes$gene
+  
+  ## assay data
+  clusterAssigned <- as.data.frame(Idents(seurat)) %>%
+  dplyr::mutate(cell=rownames(.))
+  colnames(clusterAssigned)[1] <- "ident"
+  seuratDat <- GetAssayData(seurat)
+  
+  ## genes of interest
+  genes <- data.frame(gene=rownames(seurat)) %>% 
+    mutate(geneID=gsub("^.*\\.", "", gene)) %>% filter(geneID %in% selGenes)
+
+  ## matrix with averaged cnts per ident
+  logNormExpres <- as.data.frame(t(as.matrix(
+    seuratDat[which(rownames(seuratDat) %in% genes$gene),])))
+  logNormExpres <- logNormExpres %>% dplyr::mutate(cell=rownames(.)) %>%
+    dplyr::left_join(.,clusterAssigned, by=c("cell")) %>%
+    dplyr::select(-cell) %>% dplyr::group_by(ident) %>%
+    dplyr::summarise_all(mean)
+  logNormExpresMa <- logNormExpres %>% dplyr::select(-ident) %>% as.matrix()
+  rownames(logNormExpresMa) <- logNormExpres$ident
+  logNormExpresMa <- t(logNormExpresMa)
+  rownames(logNormExpresMa) <- gsub("^.*?\\.","",rownames(logNormExpresMa))
+  
+  ## remove genes if they are all the same in all groups
+  ind <- apply(logNormExpresMa, 1, sd) == 0
+  logNormExpresMa <- logNormExpresMa[!ind,]
+  genes <- genes[!ind,]
+
+  ## color columns according to cluster
+  annotation_col <- as.data.frame(gsub("(^.*?_)","",
+                                       colnames(logNormExpresMa)))%>%
+    dplyr::mutate(celltype=gsub("(_.*$)","",colnames(logNormExpresMa)))
+  colnames(annotation_col)[1] <- "col1"
+  annotation_col <- annotation_col %>%
+    dplyr::mutate(cond = gsub(".*_","",col1)) %>%
+    dplyr::select(cond, celltype)
+  rownames(annotation_col) <- colnames(logNormExpresMa) 
+
+  ann_colors = list(
+      cond = colVecCond,
+      celltype=colVecIdent)
+  if(is.null(ann_colors$cond)){
+    annotation_col$cond <- NULL
+  }
+  
+  ## adjust order
+  logNormExpresMa <- logNormExpresMa[selGenes,]
+  if(is.null(ordVec)){
+    ordVec <- levels(seurat)
+  }
+  logNormExpresMa <- logNormExpresMa[,ordVec]
+
+  ## scaled row-wise
+  pheatmap(logNormExpresMa, scale="row" ,treeheight_row = 0, cluster_rows = cr, 
+         cluster_cols = cc,
+         color = colorRampPalette(c("#2166AC", "#F7F7F7", "#B2182B"))(50),
+         annotation_col = annotation_col, cellwidth=15, cellheight=10,
+         annotation_colors = ann_colors, gaps_row = gapVecR, gaps_col = gapVecC)
 }
 ```
 
-```{r set default assay Ccl19}
-DefaultAssay(object = seuratCcl19) <- "RNA"
-Idents(seuratCcl19) <- seuratCcl19$integrated_snn_res.0.25
+#### heatmap stem cell population maintenance
+```{r heatmap stem cell population maintenance, fig.height=8, fig.width=4}
+sig <- markerGenes %>% mutate(geneID = gene) %>% dplyr::filter(cluster == "cluster1") %>%
+  mutate(gene=gsub(".*\\.", "",  geneID)) %>% dplyr::filter(gene %in% df$gene)
 
-colPal <- c("#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#b66e8d",
-            "#61a4ba", "#6178ba", "#54a87f", "#25328a", "#b6856e",
-            "#ba6161", "#20714a", "#0073C2FF", "#EFC000FF", "#868686FF", 
-            "#CD534CFF","#7AA6DCFF", "#003C67FF", "#8F7700FF", "#3B3B3BFF",
-            "#A73030FF", "#4A6990FF")[1:length(unique(seuratCcl19$integrated_snn_res.0.25))]
-names(colPal) <- unique(seuratCcl19$integrated_snn_res.0.25)
+grpCnt <- sig %>% group_by(cluster) %>% summarise(cnt=n())
+ordVec <- levels(seuratE18EYFPv2.int)
+
+pOut <- avgHeatmap(seurat = seuratE18EYFPv2.int, selGenes = sig,
+                  colVecIdent = colLab, 
+                  ordVec=ordVec,
+                  gapVecR=NULL, gapVecC=NULL,cc=T,
+                  cr=F, condCol=F)
 ```
 
-### dimplots Ccl19+ cells
-#### clustering 
-```{r}
-DimPlot(seuratCcl19, reduction = "umap",
-        label = T, shuffle = T, cols = colPal) +
-  theme_bw() +
-  theme(axis.text = element_blank(), axis.ticks = element_blank(), 
-        panel.grid.minor = element_blank()) +
-  xlab("umap1") +
-  ylab("umap2")
-```
-
-#### assign label Ccl19+ cells
-```{r assign label Ccl19}
-seuratCcl19$label <- "label"
-seuratCcl19$label[which(seuratCcl19$integrated_snn_res.0.25 == "0")] <- "cluster2"
-seuratCcl19$label[which(seuratCcl19$integrated_snn_res.0.25 == "1")] <- "cluster1"
-seuratCcl19$label[which(seuratCcl19$integrated_snn_res.0.25 == "2")] <- "cluster3"
-table(seuratCcl19$label)
-
-##order
-seuratCcl19$label <- factor(seuratCcl19$label, levels = c("cluster2", "cluster3","cluster1"))
-table(seuratCcl19$label)
-
-colLab <- c("#900C3F","#b66e8d", "#003C67FF")
-names(colLab) <- c("cluster2", "cluster3", "cluster1")
-```
-
-
-
-#### label
-```{r}
-DimPlot(seuratCcl19, reduction = "umap", group.by = "label", cols = colLab)+
-  theme_bw() +
-  theme(axis.text = element_blank(), axis.ticks = element_blank(), 
-        panel.grid.minor = element_blank()) +
-  xlab("UMAP1") +
-  ylab("UMAP2")
-
-DimPlot(seuratCcl19, reduction = "umap", group.by = "label", pt.size=0.5,
-        cols = colLab, shuffle = T)+
-  theme_void()
-
-DimPlot(seuratCcl19, reduction = "umap", group.by = "label", pt.size=0.5,
-        cols = colLab, shuffle = T)+
-  theme_void() + 
-  theme(legend.position = "none") 
-```
-
-#### featrue plot Ccl19
-```{r featureplot Ccl19+}
-genes <- data.frame(gene=rownames(seuratCcl19)) %>% 
-    mutate(geneID=gsub("^.*\\.", "", gene)) 
-
-selGenes <- data.frame(geneID=c("Ccl19")) %>% 
-  left_join(., genes, by = "geneID") 
-
-pList <- sapply(selGenes$gene, function(x){
-  p <- FeaturePlot(seuratCcl19, reduction = "umap", 
-            features = x, 
-            cols=c("lightgrey","darkred"),
-            order = FALSE)+
-  theme(legend.position="right")
-  plot(p)
-})
-```
-
-#### signatures Ccl19+ cells
-```{r}
-##convert seurat object to sce object
-##exteract logcounts
-logcounts <- GetAssayData(seuratCcl19, assay = "RNA", slot = "data")
-counts <- GetAssayData(seuratCcl19, assay = "RNA", slot = "counts")
-##extract reduced dims from integrated assay
-pca <- Embeddings(seuratCcl19, reduction = "pca")
-umap <- Embeddings(seuratCcl19, reduction = "umap")
-##create sce object
-sce <- SingleCellExperiment(assays =list (
-  counts = counts,
-  logcounts = logcounts
-),
-colData = seuratCcl19@meta.data,
-rowData = data.frame(gene_id = rownames(logcounts)),
-reducedDims = SimpleList(
-  PCA = pca,
-  UMAP = umap
-))
-
-genes <- data.frame(geneID=rownames(sce)) %>% mutate(gene=gsub(".*\\.", "", geneID))
-pal = colorRampPalette(c("#053061", "#2166ac", "#f7f7f7", "#f4a582", "#b2183c", "#85122d"))
-```
-
-```{r}
-selGenes <- data.frame(gene=c("Cxcl13","Ccl19", "Ccl21a","Tnfsf11", "Grem1"))
-signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
+#### positive regulation of stem cell population maintenance
+```{r positive regulation of stem cell population maintenance}
+ego1 <- dplyr::filter(ego@result,ego@result$Description=="positive regulation of stem cell population maintenance")
+g1 <- ego1$geneID
+Str <-(g1)
+StrSub <- strsplit(Str, "/")
+df <- as.data.frame(StrSub)
+colnames(df) <- c("gene")
 
 ##make a count matrix of signature genes
+signGenes <- genes %>% dplyr::filter(gene %in% df$gene)
+
 sceSub <- sce[which(rownames(sce) %in% signGenes$geneID),]
 cntMat <- rowSums(t(as.matrix(
     sceSub@assays@data$logcounts)))/nrow(signGenes)
 sceSub$sign <- cntMat
 sceSub$sign2 <- sceSub$sign
-sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 2.5))
-sceSub$sign2[which(sceSub$sign > 2.5)] <- 2.5
+sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 0.8))
+sceSub$sign2[which(sceSub$sign > 0.8)] <- 0.8
 sceSub$sign2[which(sceSub$sign < 0)] <- 0
 ##check max and min values
 max(sceSub$sign)
 min(sceSub$sign)
-plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
-  theme(legend.position = "none")
+plotUMAP(sceSub, colour_by = "sign2") + sc +
+  theme(legend.position = "none", point_size = 1)
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
 ```
 
-```{r}
-selGenes <- data.frame(gene=c("Fbln5","Eln","Actg2","Acta2","Myh11","Mfap5","Gsn","Fndc1","Col1a1","Cd34"))
-signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
+#### heatmap positive regulation of stem cell population maintenance
+```{r heatmap positive regulation of stem cell population maintenance, fig.height=4, fig.width=4}
+sig <- markerGenes %>% mutate(geneID = gene) %>% dplyr::filter(cluster == "cluster1") %>%
+  mutate(gene=gsub(".*\\.", "",  geneID)) %>% dplyr::filter(gene %in% df$gene)
+
+grpCnt <- sig %>% group_by(cluster) %>% summarise(cnt=n())
+ordVec <- levels(seuratE18EYFPv2.int)
+
+pOut <- avgHeatmap(seurat = seuratE18EYFPv2.int, selGenes = sig,
+                  colVecIdent = colLab, 
+                  ordVec=ordVec,
+                  gapVecR=NULL, gapVecC=NULL,cc=T,
+                  cr=F, condCol=F)
+```
+
+#### stem cell proliferation
+```{r stem cell proliferation}
+ego1 <- dplyr::filter(ego@result,ego@result$Description=="stem cell proliferation")
+g1 <- ego1$geneID
+Str <-(g1)
+StrSub <- strsplit(Str, "/")
+df <- as.data.frame(StrSub)
+colnames(df) <- c("gene")
 
 ##make a count matrix of signature genes
+signGenes <- genes %>% dplyr::filter(gene %in% df$gene)
+
 sceSub <- sce[which(rownames(sce) %in% signGenes$geneID),]
 cntMat <- rowSums(t(as.matrix(
     sceSub@assays@data$logcounts)))/nrow(signGenes)
 sceSub$sign <- cntMat
 sceSub$sign2 <- sceSub$sign
-sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 2.5))
-sceSub$sign2[which(sceSub$sign > 2.5)] <- 2.5
+sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 0.8))
+sceSub$sign2[which(sceSub$sign > 0.8)] <- 0.8
 sceSub$sign2[which(sceSub$sign < 0)] <- 0
 ##check max and min values
 max(sceSub$sign)
 min(sceSub$sign)
-plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
-  theme(legend.position = "none")
+plotUMAP(sceSub, colour_by = "sign2") + sc +
+  theme(legend.position = "none", point_size = 1)
 plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
+```
+
+#### heatmap stem cell proliferation
+```{r heatmap stem cell proliferation, fig.height=6, fig.width=4}
+sig <- markerGenes %>% mutate(geneID = gene) %>% dplyr::filter(cluster == "cluster1") %>%
+  mutate(gene=gsub(".*\\.", "",  geneID)) %>% dplyr::filter(gene %in% df$gene)
+
+grpCnt <- sig %>% group_by(cluster) %>% summarise(cnt=n())
+ordVec <- levels(seuratE18EYFPv2.int)
+
+pOut <- avgHeatmap(seurat = seuratE18EYFPv2.int, selGenes = sig,
+                  colVecIdent = colLab, 
+                  ordVec=ordVec,
+                  gapVecR=NULL, gapVecC=NULL,cc=T,
+                  cr=F, condCol=F)
+```
+
+### slingshot 
+```{r slingshot E18}
+sce <- slingshot(sce, clusterLabels = 'label', reducedDim = 'UMAP',
+                 start.clus="cluster1",
+                 dist.method="simple", extend = 'n', stretch=0)
+```
+
+```{r slingshot-1}
+clustDat <- data.frame(clustCol=colLab) %>% rownames_to_column(., "cluster")
+colDat <- data.frame(cluster=seuratE18EYFPv2.int$label)  %>% left_join(., clustDat, by="cluster") 
+```
+
+```{r slingshot-2}
+plot(reducedDims(sce)$UMAP, col = colDat$clustCol, pch=16, asp = 1)
+lines(SlingshotDataSet(sce), lwd=2, type = 'lineages', col = 'black')
+```
+
+```{r slingshot-3}
+plot(reducedDims(sce)$UMAP, col = colDat$clustCol, pch=16, asp = 1)
+lines(SlingshotDataSet(sce), lwd=2, col='black')
 ```
 
 ```{r}
-selGenes <- data.frame(gene=c("Mki67", "Ccna2", "Cdca8", "Prc1", "Aurkb"))
-signGenes <- genes %>% dplyr::filter(gene %in% selGenes$gene)
+colors <- colorRampPalette(brewer.pal(11,'YlGnBu'))(100)
+plotcol <- colors[cut(slingAvgPseudotime(SlingshotDataSet(sce)), breaks=100)]
 
-##make a count matrix of signature genes
-sceSub <- sce[which(rownames(sce) %in% signGenes$geneID),]
-cntMat <- rowSums(t(as.matrix(
-    sceSub@assays@data$logcounts)))/nrow(signGenes)
-sceSub$sign <- cntMat
-sceSub$sign2 <- sceSub$sign
-sc <- scale_colour_gradientn(colours = pal(100), limits=c(0, 2))
-sceSub$sign2[which(sceSub$sign > 2)] <- 2
-sceSub$sign2[which(sceSub$sign < 0)] <- 0
-##check max and min values
-max(sceSub$sign)
-min(sceSub$sign)
-plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc +
-  theme(legend.position = "none")
-plotUMAP(sceSub, colour_by = "sign2", point_size = 1) + sc
+plot(reducedDims(sce)$UMAP, col = plotcol, pch=16, asp = 1)
+lines(SlingshotDataSet(sce), lwd=2, col='black')
 ```
 
-## session info
+```{r}
+colors <- colorRampPalette(brewer.pal(11,'PuOr')[-6])(100)
+plotcol <- colors[cut(slingAvgPseudotime(SlingshotDataSet(sce)), breaks=100)]
+
+plot(reducedDims(sce)$UMAP, col = plotcol, pch=16, asp = 1)
+lines(SlingshotDataSet(sce), lwd=2, col='black')
+```
+
+### session info
 ```{r date and session info}
 date()
 sessionInfo()
