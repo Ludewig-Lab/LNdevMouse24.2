@@ -1,5 +1,5 @@
 ---
-title: "tradeSeqmLN"
+title: "tradeSeq mLN EYFP+"
 author: "A.DeMartin"
 date: "2025-05-12"
 output: 
@@ -16,8 +16,8 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, dev = c("png", "pdf"))
 seed <- 1234
 ```
 
-## load packages
-```{r load packages, warning=FALSE, include=FALSE}
+#### load packages
+```{r load packages, warning=FALSE}
 library(ExploreSCdataSeurat3)
 library(runSeurat3)
 library(Seurat)
@@ -48,17 +48,19 @@ library(RColorBrewer)
 library(tradeSeq)
 library(scran)
 library(clusterExperiment)
+library(here)
 ```
 
-### load sce mLNf3 slingshot v2
+#### load sce slingshot mLN EYFP+
 ```{r load sce mLNf3 slingshot}
-fileNam <- "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/LNmLToRev_EYFP_mLNf3_slingshot_v2_sce.rds"
+basedir <- here()
+fileNam <- paste0(basedir, "/data/LNmLToRev_EYFP_mLNf3_slingshot_v2_sce.rds")
 scemLNf3v2<- readRDS(fileNam)
 ```
 
-## load object mLNEYFPf3
+#### load object mLN EYFP+ fil
 ```{r load object mLNf3}
-fileNam <- "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/LNmLToRev_EYFP_mLNf3_seurat.rds"
+fileNam <- paste0(basedir, "/data/LNmLToRev_EYFP_mLNf3_seurat.rds")
 seuratmLNf3 <- readRDS(fileNam)
 table(seuratmLNf3$dataset)
 ```
@@ -90,25 +92,26 @@ colDat <- data.frame(cluster=scemLNf3v2$RNA_snn_res.0.4) %>%
 plot(reducedDims(scemLNf3v2)$UMAP, col = colDat$clustCol, pch=16, asp = 1)
 lines(SlingshotDataSet(scemLNf3v2), lwd=2, col='black')
 ```
-# tradeSeq
-## evaluate k
+
+### tradeSeq
+#### evaluate k
 ```{r eval k, eval=FALSE, include=TRUE}
 icMat <- evaluateK(counts = counts(scemLNf3v2), sds = SlingshotDataSet(scemLNf3v2), k = 3:10, 
                    nGenes = 200, verbose = T)
 ```
 
-## plot results from icMat
+#### plot results from icMat
 ```{r, eval=FALSE, include=TRUE}
-write.table(icMat, file= "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/icMat.txt", sep = "\t", quote = FALSE, row.names = TRUE)
+write.table(icMat, file=paste0(basedir,"/data/icMat.txt", sep = "\t", quote = FALSE, row.names = TRUE)
 
 icMat_clean <- icMat[complete.cases(icMat), ]
-# Convert to data frame
+## Convert to data frame
 avg_df <- data.frame(
   k = colnames(icMat_clean),
   AvgAIC = colMeans(icMat_clean)
 )
 
-# Preserve gene order if needed
+## Preserve gene order if needed
 avg_df$k <- factor(avg_df$k, levels = avg_df$k)
 
 ggplot(avg_df, aes(x = k, y = AvgAIC, group = 1)) +
@@ -121,7 +124,7 @@ ggplot(avg_df, aes(x = k, y = AvgAIC, group = 1)) +
   labs(x = "k", y = "Average AIC")
 ```
 
-## subsample sce
+#### subsample sce
 ```{r, include=TRUE, eval=FALSE}
 dim(scemLNf3v2)
 ```
@@ -132,9 +135,9 @@ sceSub <- scemLNf3v2[,cellSub$cell]
 dim(sceSub)
 ```
 
-## load sce Sub
+#### load sce sub
 ```{r}
-fileNam <- "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sce.rds"
+fileNam <- paste0(basedir, "/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sce.rds")
 sceSub <- readRDS(fileNam)
 ```
 
@@ -146,12 +149,13 @@ colDat <- data.frame(cluster=sceSub$RNA_snn_res.0.4) %>%
 plot(reducedDims(sceSub)$UMAP, col = colDat$clustCol, pch=16, asp = 1)
 lines(SlingshotDataSet(sceSub), lwd=2, col='black')
 ```
+
 ```{r}
 plot(reducedDims(sceSub)$UMAP, col = colDat$ageCol, pch=16, asp = 1)
 lines(SlingshotDataSet(sceSub), lwd=2, col='black')
 ```
 
-## fitGAM
+#### fitGAM
 ```{r, eval=FALSE,include=TRUE}
 ## only hvg
 dec.sceSub <- modelGeneVar(sceSub)
@@ -167,30 +171,28 @@ sceGAM <- fitGAM(counts = counts(sceSub), pseudotime = pseudotimeSub,
                 nknots = 8, verbose = T, parallel=T, genes=topHVG)
 ```
 
-
 ```{r, eval=FALSE, include=TRUE}
 ## save
-saveRDS(sceGAM, file =  "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sceGAM.rds")
+saveRDS(sceGAM, file =  paste0(basedir,"/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sceGAM.rds"))
 
-saveRDS(sceSub, file =  "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sce.rds")
+saveRDS(sceSub, file =  paste0(basedir,"/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sce.rds"))
 
-saveRDS(pseudotimeSub, file =  "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_pseudotime.rds")
+saveRDS(pseudotimeSub, file = paste0(basedir,"/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_pseudotime.rds"))
 
-saveRDS(cellWeightsSub, file =  "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_cellweights.rds")
+saveRDS(cellWeightsSub, file =  paste0(basedir,"/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_cellweights.rds"))
 
-saveRDS(topHVG, file =  "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_topHVG.rds")
-
+saveRDS(topHVG, file =  paste0(basedir, "/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_topHVG.rds"))
 ```
 
-## load GAM
+### load GAM
 ```{r}
-fileNam <- "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sceGAM.rds"
+fileNam <- paste0(basedir, "/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_sceGAM.rds")
 sceGAM <- readRDS(fileNam)
 
 table(rowData(sceGAM)$tradeSeq$converged)
 ```
 
-## Between lineage comparison
+### Between lineage comparison
 ```{r}
 patternRes <- patternTest(sceGAM, l2fc = log2(2))
 oPat <- order(patternRes$waldStat, decreasing = TRUE)
@@ -209,18 +211,7 @@ lapply(rankGene[1:50], function(selGene){
 })
 ```
 
-```{r}
-## selected genes
-selGene <- c("ENSMUSG00000027358.Bmp2", "ENSMUSG00000021835.Bmp4")
-
-lapply(selGene,function(selGene){
-  plotSmoothers(sceGAM, counts(sceGAM), gene = selGene, curvesCols=colLin) +
-    ggtitle(selGene) +
-    scale_color_manual(values=colLin)
-})
-```
-
-##cluster genes betweeen lineages
+#### cluster genes betweeen lineages
 ```{r}
 nPointsClus <- 100
 ```
@@ -230,14 +221,13 @@ clusPat <- clusterExpressionPatterns(sceGAM, nPoints = nPointsClus,
                                      genes = rankGene[1:500], nReducedDims=20)
 ```
 
-##save clusPat
 ```{r save, include=TRUE, eval=FALSE}
-saveRDS(clusPat, file =  "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_clusPat.rds")
+saveRDS(clusPat, file =  paste0(basedir, "/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_clusPat.rds")
 ```
 
-##load clusPat
+#### load clusPat
 ```{r load}
-fileNam <- "/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_clusPat.rds"
+fileNam <- paste0(basedir, "/data/tradeSEQ/LNmLToRev_EYFP_mLNf3_slingshot_v2_TSsub5000_clusPat.rds")
 clusPat <- readRDS(fileNam)
 ```
 
@@ -245,7 +235,7 @@ clusPat <- readRDS(fileNam)
 clusterLabels <- primaryCluster(clusPat$rsec)
 
 cUniq <- unique(clusterLabels)
-cUniq <- cUniq[!cUniq == -1] # remove unclustered genes
+cUniq <- cUniq[!cUniq == -1] ## remove unclustered genes
 
 for (xx in cUniq) {
   cId <- which(clusterLabels == xx)
@@ -276,7 +266,7 @@ for (xx in cUniq) {
 clusterLabels <- primaryCluster(clusPat$rsec)
 
 cUniq <- unique(clusterLabels)
-cUniq <- cUniq[!cUniq == -1] # remove unclustered genes
+cUniq <- cUniq[!cUniq == -1] ## remove unclustered genes
 
 for (xx in cUniq) {
   cId <- which(clusterLabels == xx)
@@ -308,13 +298,13 @@ clustList <- lapply(cUniq, function(cl){
   cId <- which(clusterLabels == cl)
   genes <- rownames(clusPat$yhatScaled)[cId]
 }) 
-
 names(clustList) <- cUniq
 
-saveRDS(clustList, file="/Users/immbio/Desktop/Project/Angelina/LNmLToRev/data/tradeSEQ/diffLinGeneCluster.rds")
+## save
+saveRDS(clustList, file=paste0(basedir,"/data/tradeSEQ/diffLinGeneCluster.rds"))
 ```
 
-## session info
+### session info
 ```{r date and session info}
 date()
 sessionInfo()
